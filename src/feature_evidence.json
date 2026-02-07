@@ -2,9 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-ensure-the-app-always-mounts-a-react-element-tree-to-the-root-element-render-app-wrapped-with-the-required-providers-so-the-ui-is-not-blank-when-running-locally-even-if-a-user-s-downloaded-copy-of-frontend-src-main-tsx-contains-an-empty-render-call",
-      "featureTitle": "Ensure the app always mounts a React element tree to the #root element (render <App /> wrapped with the required providers) so the UI is not blank when running locally, even if a user’s downloaded copy of frontend/src/main.tsx contains an empty render() call.",
+      "featureId": "feature-add-an-app-wide-site-disabled-maintenance-mode-gate-that-when-enabled-prevents-the-marketing-website-ui-routes-header-footer-pages-from-rendering-and-instead-renders-a-single-standalone-screen-indicating-the-app-is-offline-unpublished",
+      "featureTitle": "Add an app-wide “site disabled / maintenance mode” gate that, when enabled, prevents the marketing website UI (routes, header, footer, pages) from rendering and instead renders a single standalone screen indicating the app is offline/unpublished.",
       "files": [
+        "frontend/src/components/MaintenanceScreen.tsx",
         "frontend/src/entry.tsx"
       ],
       "components": [
@@ -15,15 +16,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-20"
+        "REQ-22"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-do-not-modify-any-files-in-the-immutable-frontend-paths-if-an-entry-point-change-is-required-to-guarantee-mounting-implement-it-via-a-new-entry-module-e-g-a-new-src-file-and-update-frontend-index-html-to-import-that-new-entry-module-instead-of-editing-frontend-src-main-tsx",
-      "featureTitle": "Do not modify any files in the immutable frontend paths; if an entry-point change is required to guarantee mounting, implement it via a new entry module (e.g., a new src file) and update frontend/index.html to import that new entry module instead of editing frontend/src/main.tsx.",
+      "featureId": "feature-implement-the-disabled-maintenance-gate-as-a-simple-explicit-configuration-mechanism-that-can-be-changed-without-touching-immutable-frontend-paths-e-g-by-toggling-a-single-constant-or-reading-a-vite-environment-variable-in-the-non-immutable-entry-path-currently-used-by-the-app-frontend-src-entry-tsx",
+      "featureTitle": "Implement the disabled/maintenance gate as a simple, explicit configuration mechanism that can be changed without touching immutable frontend paths (e.g., by toggling a single constant or reading a Vite environment variable in the non-immutable entry path currently used by the app: `frontend/src/entry.tsx`).",
       "files": [
-        "frontend/index.html"
+        "frontend/src/entry.tsx",
+        "frontend/src/lib/maintenanceMode.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -33,7 +35,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-21"
+        "REQ-23"
       ],
       "confidence": "high"
     }

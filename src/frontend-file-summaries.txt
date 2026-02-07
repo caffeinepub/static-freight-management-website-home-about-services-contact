@@ -20,6 +20,8 @@
   "frontend/src/lib/formatters.ts": "Utility functions for formatting timestamps from bigint nanoseconds to human-readable date/time strings.",
   "frontend/package.json": "Complete package manifest for a Vite + React + TypeScript + Tailwind frontend with all required dependencies including Vite, React 19, TanStack Router/Query, next-themes, ICP/Dfinity SDK, shadcn/ui Radix primitives, and Tailwind plugins, enabling pnpm install and pnpm run dev to work correctly on Windows.",
   "frontend/src/main.tsx": "Application entry point that wraps the app with QueryClientProvider (configured with 5-minute stale time and disabled window focus refetch) and InternetIdentityProvider, rendering the root App component.",
-  "frontend/src/entry.tsx": "New React application entry point that creates a QueryClient, imports global styles, and mounts the App component wrapped with QueryClientProvider and InternetIdentityProvider to the #root element.",
-  "frontend/index.html": "HTML entry point that loads the new entry module (/src/entry.tsx) instead of main.tsx to ensure the app renders correctly even if main.tsx is incomplete."
+  "frontend/src/entry.tsx": "React application entry point that conditionally renders either the MaintenanceScreen (when maintenance mode is enabled) or the full app with QueryClientProvider and InternetIdentityProvider based on the MAINTENANCE_ENABLED flag.",
+  "frontend/index.html": "HTML entry point that loads the new entry module (/src/entry.tsx) instead of main.tsx to ensure the app renders correctly even if main.tsx is incomplete.",
+  "frontend/src/lib/maintenanceMode.ts": "Configuration module that exports a single boolean constant (MAINTENANCE_ENABLED) to control whether the app shows the maintenance screen or runs normally.",
+  "frontend/src/components/MaintenanceScreen.tsx": "Standalone maintenance/offline screen component that displays a clear message indicating the site is not published and unavailable, with no navigation links or backend calls."
 }

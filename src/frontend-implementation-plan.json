@@ -1,37 +1,48 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix blank page by switching to a resilient React entry module",
+  "title": "Maintenance-mode gate to disable public marketing UI",
   "requirements": [
     {
-      "id": "REQ-20",
-      "summary": "Add a resilient React entry module that always mounts <App /> to #root with exactly one QueryClientProvider and InternetIdentityProvider.",
+      "id": "REQ-22",
+      "summary": "Add an app-wide maintenance gate that replaces all marketing routes/layout with a standalone offline screen and prevents any normal UI rendering when enabled.",
       "acceptanceCriteria": [
-        "Running `pnpm run dev` renders the site content (header/nav and Home page) instead of a blank screen.",
-        "The React entry point renders `<App />` and includes `QueryClientProvider` and `InternetIdentityProvider` wrappers exactly once (no duplicate React Query provider in the mounted tree).",
-        "No user-facing text is changed as part of this fix (only mounting/bootstrapping behavior)."
+        "When the disabled gate is enabled, loading any route (e.g., /, /about, /services, /contact, /tracking) displays only the offline/maintenance screen.",
+        "The offline/maintenance screen contains clear English text that the site is not available / not published and to check back later (no internal navigation links).",
+        "When the disabled gate is enabled, no page content from Home/About/Services/Contact/Tracking is visible and no calls to backend actors are initiated from the UI as part of rendering.",
+        "When the disabled gate is disabled, the app renders normally with existing routes and layout unchanged."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/entry.tsx",
+          "path": "frontend/src/components/MaintenanceScreen.tsx",
           "operation": "create",
-          "description": "Create a new React entry module that imports global styles, creates a single React Query QueryClient instance, and mounts a React element tree to the '#root' element by rendering <App /> wrapped exactly once with QueryClientProvider and InternetIdentityProvider. Use the selected 'core-infrastructure' component patterns for the React app entry point where applicable; verify the component's usage instructions before implementing."
+          "description": "Create a standalone Maintenance/Offline screen component with clear English copy indicating the site is offline/unpublished and to check back later. Ensure it contains no internal navigation links and does not import router/auth/actor hooks. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/entry.tsx",
+          "operation": "modify",
+          "description": "Wire an app-wide gate so that when maintenance is enabled, the app renders only MaintenanceScreen and does not mount App/Router, header/footer, pages, or data/auth providers (to avoid initiating backend actor calls during render). When disabled, keep existing render path unchanged. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-21",
-      "summary": "Avoid editing immutable entry-point and hook files by switching index.html to load the new entry module instead of src/main.tsx.",
+      "id": "REQ-23",
+      "summary": "Implement the maintenance gate as a single explicit toggle controlled from entry.tsx (or a file it imports), without modifying immutable frontend paths and without changing index.html’s entry module.",
       "acceptanceCriteria": [
-        "No changes are made to any immutable paths listed by the platform (including frontend/src/main.tsx and Internet Identity hook files).",
-        "frontend/index.html loads the new entry module and the app renders correctly.",
-        "The build (`pnpm run build`) and preview (`pnpm run preview`) still work and show the same pages/routes."
+        "The toggle point for enabling/disabling the maintenance screen is located in `frontend/src/entry.tsx` (or another non-immutable file imported by it).",
+        "No files under `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, `frontend/src/components/ui` are modified.",
+        "`frontend/index.html` continues to load `/src/entry.tsx` as the single entry module."
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
+          "path": "frontend/src/lib/maintenanceMode.ts",
+          "operation": "create",
+          "description": "Add a simple configuration helper (e.g., read a Vite environment variable and/or a single exported constant) that determines whether maintenance mode is enabled; this module must be imported by frontend/src/entry.tsx. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/entry.tsx",
           "operation": "modify",
-          "description": "Update the Vite module script import to load the new entry module (e.g., /src/entry.tsx) instead of /src/main.tsx, ensuring local dev, build, and preview mount the app even if frontend/src/main.tsx is empty."
+          "description": "Place the explicit toggle point in this file (or via the new helper it imports) so switching maintenance mode requires changing only this non-immutable entry path/config. Do not modify any immutable paths and keep frontend/index.html loading /src/entry.tsx. Verify the component's usage instructions before implementing."
         }
       ]
     }

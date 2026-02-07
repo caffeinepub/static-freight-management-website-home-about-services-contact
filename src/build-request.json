@@ -1,54 +1,54 @@
 {
   "kind": "build_request",
-  "title": "Fix blank page by ensuring a valid React entry point mounts the app",
-  "priority": "normal",
+  "title": "Disable public production UI (rollback substitute) by showing an Offline/Maintenance screen",
+  "priority": "high",
   "requirements": [
     {
-      "id": "REQ-20",
-      "text": "Ensure the app always mounts a React element tree to the #root element (render <App /> wrapped with the required providers) so the UI is not blank when running locally, even if a user’s downloaded copy of frontend/src/main.tsx contains an empty render() call.",
+      "id": "REQ-22",
+      "text": "Add an app-wide “site disabled / maintenance mode” gate that, when enabled, prevents the marketing website UI (routes, header, footer, pages) from rendering and instead renders a single standalone screen indicating the app is offline/unpublished.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-9"
         ],
         "quotes": [
-          "same, this is the content of main.tsx ... ReactDOM.createRoot(document.getElementById(\"root\")).render( );"
+          "you made it to production. i dont want to publish. can you rollback"
         ]
       },
       "acceptanceCriteria": [
-        "Running `pnpm run dev` renders the site content (header/nav and Home page) instead of a blank screen.",
-        "The React entry point renders `<App />` and includes `QueryClientProvider` and `InternetIdentityProvider` wrappers exactly once (no duplicate React Query provider in the mounted tree).",
-        "No user-facing text is changed as part of this fix (only mounting/bootstrapping behavior)."
+        "When the disabled gate is enabled, loading any route (e.g., /, /about, /services, /contact, /tracking) displays only the offline/maintenance screen.",
+        "The offline/maintenance screen contains clear English text that the site is not available / not published and to check back later (no internal navigation links).",
+        "When the disabled gate is enabled, no page content from Home/About/Services/Contact/Tracking is visible and no calls to backend actors are initiated from the UI as part of rendering.",
+        "When the disabled gate is disabled, the app renders normally with existing routes and layout unchanged."
       ]
     },
     {
-      "id": "REQ-21",
-      "text": "Do not modify any files in the immutable frontend paths; if an entry-point change is required to guarantee mounting, implement it via a new entry module (e.g., a new src file) and update frontend/index.html to import that new entry module instead of editing frontend/src/main.tsx.",
+      "id": "REQ-23",
+      "text": "Implement the disabled/maintenance gate as a simple, explicit configuration mechanism that can be changed without touching immutable frontend paths (e.g., by toggling a single constant or reading a Vite environment variable in the non-immutable entry path currently used by the app: `frontend/src/entry.tsx`).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-9"
         ],
         "quotes": [
-          "same, this is the content of main.tsx ... ReactDOM.createRoot(document.getElementById(\"root\")).render( );"
+          "can you rollback"
         ]
       },
       "acceptanceCriteria": [
-        "No changes are made to any immutable paths listed by the platform (including frontend/src/main.tsx and Internet Identity hook files).",
-        "frontend/index.html loads the new entry module and the app renders correctly.",
-        "The build (`pnpm run build`) and preview (`pnpm run preview`) still work and show the same pages/routes."
+        "The toggle point for enabling/disabling the maintenance screen is located in `frontend/src/entry.tsx` (or another non-immutable file imported by it).",
+        "No files under `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, `frontend/src/components/ui` are modified.",
+        "`frontend/index.html` continues to load `/src/entry.tsx` as the single entry module."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited (including frontend/src/main.tsx, frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, and frontend/src/components/ui/*).",
-    "Keep a single React Query QueryClientProvider in the rendered tree (no duplicates).",
-    "Use English for any user-facing text."
+    "Frontend immutable paths must not be edited: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, and anything under `frontend/src/components/ui`.",
+    "Backend must remain a single Motoko actor in `backend/main.mo`; do not introduce additional backend services.",
+    "This change must not rely on any ability to programmatically “unpublish” or “rollback” a production deployment; instead, it must be achieved via app behavior changes within this codebase."
   ],
   "nonGoals": [
-    "Adding new pages or new business features.",
-    "Changing the website’s design/theme/content beyond what is necessary to fix the blank render.",
-    "Backend changes or state migrations."
+    "Do not implement deployment tooling changes (e.g., DFX rollback, canister uninstall, domain unmapping) because they are outside the application codebase.",
+    "Do not add new product features unrelated to disabling the public UI (no new pages, tracking functionality, or content redesign)."
   ],
   "imageRequirements": {
     "required": [],

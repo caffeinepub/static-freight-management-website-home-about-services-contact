@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 17,
+  "projectStateVersion": 19,
   "summary": "Static freight management website with multiple freight-related service offerings and four pages (Home, About Us, Services, Contact Us).",
   "architectural_notes": [
     "Hero section should only use the ship-with-containers background image; remove the additional right-side hero image (freight-hero.dim_1920x800.png).",
@@ -9,7 +9,8 @@
     "Hero headline, supporting paragraph, and stats labels on the ship-with-containers hero background should use a light/white text color to maintain contrast against the image.",
     "Frontend project should be runnable locally: ensure frontend/package.json contains proper Vite (and app) dependencies and standard scripts (dev/build/preview), so `pnpm install` + `pnpm run dev` works on a fresh download.",
     "Ensure frontend/package.json includes all actual app dependencies referenced in code (e.g., @tanstack/react-query and any router libs) so imports resolve and `pnpm run dev` works.",
-    "Blank page likely caused by `frontend/src/main.tsx` rendering nothing: `ReactDOM.createRoot(...).render()` is missing its JSX tree (e.g., `<React.StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></React.StrictMode>`). Ensure `main.tsx` mounts `<App />` (and providers) into `#root`."
+    "Blank page likely caused by `frontend/src/main.tsx` rendering nothing: `ReactDOM.createRoot(...).render()` is missing its JSX tree (e.g., `<React.StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></React.StrictMode>`). Ensure `main.tsx` mounts `<App />` (and providers) into `#root`.",
+    "Do not publish/deploy to production without explicit user confirmation; prefer draft/preview until approved."
   ],
   "known_issues": [
     "An extra hero image (freight-hero.dim_1920x800.png) is appearing on the right side and should be removed (user chose option 1).",
@@ -17,7 +18,8 @@
     "Hero section headline/paragraph/stats text is not readable against the background; set to white/light (and/or adjust overlay) for sufficient contrast.",
     "Downloaded project’s frontend/package.json appears incomplete/incorrect for local dev (no/incorrect scripts or missing Vite dependency), causing `pnpm run dev` / `vite` command failures on Windows.",
     "Local dev build fails due to missing dependency/import for `@tanstack/react-query` (error at `import { QueryClient, QueryClientProvider } from \"@tanstack/react-query\";`), indicating package.json dependencies are incomplete/out of sync with code.",
-    "Local app shows a blank page because `frontend/src/main.tsx` calls `ReactDOM.createRoot(...).render()` with no React element tree; nothing is mounted to `#root` (should at least render `<App />`, optionally wrapped in `QueryClientProvider`)."
+    "Local app shows a blank page because `frontend/src/main.tsx` calls `ReactDOM.createRoot(...).render()` with no React element tree; nothing is mounted to `#root` (should at least render `<App />`, optionally wrapped in `QueryClientProvider`).",
+    "Site was published to production (Version 8) but user does not want a live deployment; needs rollback/unpublish."
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -164,6 +166,22 @@
         "REQ-21"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-an-app-wide-site-disabled-maintenance-mode-gate-that-when-enabled-prevents-the-marketing-website-ui-routes-header-footer-pages-from-rendering-and-instead-renders-a-single-standalone-screen-indicating-the-app-is-offline-unpublished",
+      "title": "Add an app-wide “site disabled / maintenance mode” gate that, when enabled, prevents the marketing website UI (routes, header, footer, pages) from rendering and instead renders a single standalone screen indicating the app is offline/unpublished.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-disabled-maintenance-gate-as-a-simple-explicit-configuration-mechanism-that-can-be-changed-without-touching-immutable-frontend-paths-e-g-by-toggling-a-single-constant-or-reading-a-vite-environment-variable-in-the-non-immutable-entry-path-currently-used-by-the-app-frontend-src-entry-tsx",
+      "title": "Implement the disabled/maintenance gate as a simple, explicit configuration mechanism that can be changed without touching immutable frontend paths (e.g., by toggling a single constant or reading a Vite environment variable in the non-immutable entry path currently used by the app: `frontend/src/entry.tsx`).",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -213,6 +231,12 @@
       "reqIds": [
         "REQ-18"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Rollback/unpublish the production deployment and remove the live web app (user does not want it live).",
+      "reqIds": [],
       "status": "pending"
     }
   ],

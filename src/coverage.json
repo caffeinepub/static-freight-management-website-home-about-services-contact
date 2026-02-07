@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-07T03:03:43.569Z",
+  "generatedAt": "2026-02-07T03:11:43.434Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,25 +11,29 @@
     "implemented": 2,
     "items": [
       {
-        "id": "REQ-20",
-        "summary": "Ensure the app always mounts a React element tree to the #root element (render <App /> wrapped with the required providers) so the UI is not blank when running locally, even if a user’s downloaded copy of frontend/src/main.tsx contains an empty render() call.",
+        "id": "REQ-22",
+        "summary": "Add an app-wide “site disabled / maintenance mode” gate that, when enabled, prevents the marketing website UI (routes, header, footer, pages) from rendering and instead renders a single standalone screen indicating the app is offline/unpublished.",
         "status": "implemented",
         "plannedFiles": [
+          "frontend/src/components/MaintenanceScreen.tsx",
           "frontend/src/entry.tsx"
         ],
         "matchedFiles": [
+          "frontend/src/components/MaintenanceScreen.tsx",
           "frontend/src/entry.tsx"
         ]
       },
       {
-        "id": "REQ-21",
-        "summary": "Do not modify any files in the immutable frontend paths; if an entry-point change is required to guarantee mounting, implement it via a new entry module (e.g., a new src file) and update frontend/index.html to import that new entry module instead of editing frontend/src/main.tsx.",
+        "id": "REQ-23",
+        "summary": "Implement the disabled/maintenance gate as a simple, explicit configuration mechanism that can be changed without touching immutable frontend paths (e.g., by toggling a single constant or reading a Vite environment variable in the non-immutable entry path currently used by the app: `frontend/src/entry.tsx`).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/index.html"
+          "frontend/src/lib/maintenanceMode.ts",
+          "frontend/src/entry.tsx"
         ],
         "matchedFiles": [
-          "frontend/index.html"
+          "frontend/src/lib/maintenanceMode.ts",
+          "frontend/src/entry.tsx"
         ]
       }
     ]
@@ -39,8 +43,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/index.html",
+    "frontend/src/components/MaintenanceScreen.tsx",
     "frontend/src/entry.tsx",
+    "frontend/src/lib/maintenanceMode.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
