@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 19,
-  "summary": "Static freight management website with multiple freight-related service offerings and four pages (Home, About Us, Services, Contact Us).",
+  "projectStateVersion": 31,
+  "summary": "Static freight management website with multiple freight-related service offerings and four pages (Home, About Us, Services, Contact Us), intended to remain publicly accessible during development so the user can preview the working site.",
   "architectural_notes": [
     "Hero section should only use the ship-with-containers background image; remove the additional right-side hero image (freight-hero.dim_1920x800.png).",
     "Ensure text over hero/background images meets accessible contrast (adjust overlay/text colors as needed so text is not hidden).",
@@ -10,7 +10,9 @@
     "Frontend project should be runnable locally: ensure frontend/package.json contains proper Vite (and app) dependencies and standard scripts (dev/build/preview), so `pnpm install` + `pnpm run dev` works on a fresh download.",
     "Ensure frontend/package.json includes all actual app dependencies referenced in code (e.g., @tanstack/react-query and any router libs) so imports resolve and `pnpm run dev` works.",
     "Blank page likely caused by `frontend/src/main.tsx` rendering nothing: `ReactDOM.createRoot(...).render()` is missing its JSX tree (e.g., `<React.StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></React.StrictMode>`). Ensure `main.tsx` mounts `<App />` (and providers) into `#root`.",
-    "Do not publish/deploy to production without explicit user confirmation; prefer draft/preview until approved."
+    "Do not publish/deploy to production without explicit user confirmation; prefer draft/preview until approved.",
+    "User requested the site remain accessible for preview during development; do not enable/force the maintenance/disabled-site gate unless explicitly asked.",
+    "If using a hero background video, implement it as an optimized, muted, looping, autoplay inline video with a static image fallback for performance/accessibility and reduced-motion preferences."
   ],
   "known_issues": [
     "An extra hero image (freight-hero.dim_1920x800.png) is appearing on the right side and should be removed (user chose option 1).",
@@ -19,9 +21,9 @@
     "Downloaded project’s frontend/package.json appears incomplete/incorrect for local dev (no/incorrect scripts or missing Vite dependency), causing `pnpm run dev` / `vite` command failures on Windows.",
     "Local dev build fails due to missing dependency/import for `@tanstack/react-query` (error at `import { QueryClient, QueryClientProvider } from \"@tanstack/react-query\";`), indicating package.json dependencies are incomplete/out of sync with code.",
     "Local app shows a blank page because `frontend/src/main.tsx` calls `ReactDOM.createRoot(...).render()` with no React element tree; nothing is mounted to `#root` (should at least render `<App />`, optionally wrapped in `QueryClientProvider`).",
-    "Site was published to production (Version 8) but user does not want a live deployment; needs rollback/unpublish."
+    "Caffeine build failed with 'Internal configuration problem encountered' when attempting to apply logo/contact detail updates."
   ],
-  "isFixRequest": true,
+  "isFixRequest": false,
   "existing_features": [
     {
       "id": "feature-create-a-static-marketing-website-for-a-freight-management-company-with-four-pages-home-about-us-services-and-contact-us",
@@ -182,6 +184,94 @@
         "REQ-23"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-make-the-maintenance-disabled-site-gate-effectively-block-the-public-deployment-at-https-fgmt-3jl-caffeine-xyz-so-that-users-cannot-access-any-marketing-website-ui-routes-header-footer-or-pages-and-only-the-standalone-maintenance-offline-screen-renders",
+      "title": "Make the maintenance/disabled-site gate effectively block the public deployment at https://fgmt-3jl.caffeine.xyz/ so that users cannot access any marketing website UI (routes, header/footer, or pages) and only the standalone maintenance/offline screen renders.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-that-the-production-build-uses-the-maintenance-gated-entry-module-frontend-src-entry-tsx-via-frontend-index-html-and-that-no-alternate-entry-path-can-be-used-to-render-the-normal-app-while-maintenance-mode-is-enabled",
+      "title": "Verify that the production build uses the maintenance-gated entry module (frontend/src/entry.tsx via frontend/index.html) and that no alternate entry path can be used to render the normal app while maintenance mode is enabled.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-user-facing-maintenance-offline-messaging-english-to-clearly-indicate-the-site-is-offline-unpublished-and-not-accessible-right-now-and-ensure-the-message-is-the-only-visible-content-when-maintenance-mode-is-enabled",
+      "title": "Update user-facing maintenance/offline messaging (English) to clearly indicate the site is offline/unpublished and not accessible right now, and ensure the message is the only visible content when maintenance mode is enabled.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-production-deployment-at-https-fgmt-3jl-caffeine-xyz-is-not-publicly-accessible-by-forcing-the-app-wide-maintenance-disabled-site-gate-to-remain-enabled-so-that-only-the-standalone-offline-screen-renders-no-header-footer-no-routes-pages-no-marketing-content-regardless-of-which-path-the-visitor-tries-to-access",
+      "title": "Ensure the production deployment at https://fgmt-3jl.caffeine.xyz/ is not publicly accessible by forcing the app-wide maintenance/disabled-site gate to remain enabled so that only the standalone offline screen renders (no header/footer, no routes/pages, no marketing content) regardless of which path the visitor tries to access.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-disable-the-app-wide-maintenance-disabled-site-gate-so-the-normal-marketing-website-renders-routes-header-footer-and-pages-instead-of-the-standalone-maintenancescreen",
+      "title": "Disable the app-wide maintenance/disabled-site gate so the normal marketing website renders (routes, header/footer, and pages) instead of the standalone MaintenanceScreen.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-html-document-title-in-frontend-index-html-so-it-no-longer-indicates-the-site-is-offline-when-maintenance-mode-is-disabled",
+      "title": "Update the HTML document title in `frontend/index.html` so it no longer indicates the site is offline when maintenance mode is disabled.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-looping-background-hero-video-asset-of-a-ship-moving-at-sea-to-the-frontend-static-assets-and-use-it-as-the-home-page-hero-background-instead-of-the-current-background-image",
+      "title": "Add a looping background hero video asset of a ship moving at sea to the frontend static assets, and use it as the Home page hero background instead of the current background image.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-new-hero-background-video-maintains-legibility-and-accessibility-for-all-existing-hero-text-and-buttons-by-keeping-or-adjusting-the-existing-overlay-on-top-of-the-video-and-providing-a-static-fallback-when-video-playback-is-unavailable",
+      "title": "Ensure the new hero background video maintains legibility and accessibility for all existing hero text and buttons by keeping (or adjusting) the existing overlay on top of the video and providing a static fallback when video playback is unavailable.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-provided-logo-image-frgmtlogo-png-to-the-frontend-static-assets-under-frontend-public-assets-and-replace-the-current-header-branding-icon-globalfreight-with-this-logo-image-and-the-company-name-di-logisolutions-the-header-logo-must-link-to-the-home-page-and-render-correctly-in-both-light-and-dark-themes",
+      "title": "Add the user-provided logo image `frgmtlogo.png` to the frontend static assets (under `frontend/public/assets/`) and replace the current header branding (icon + “GlobalFreight”) with this logo image and the company name “Di Logisolutions”. The header logo must link to the Home page and render correctly in both light and dark themes.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-company-contact-details-everywhere-they-appear-in-the-ui-footer-and-contact-details-components-at-minimum-to-use-the-exact-user-provided-information-office-address-di-logisolutions-a89-road-no-2-mahipalpur-new-delhi-110037-phone-91-9568740074-and-011-41447376-email-info-dilss-in-company-name-di-logisolution-registered-address-rzk-2-326-i-khasra-no-85-17-block-k-2-nihal-vihar-nangaloi-west-delhi-delhi-11004",
+      "title": "Update company/contact details everywhere they appear in the UI (footer and contact details components at minimum) to use the exact user-provided information: Office Address: “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”; Phone: “+91-9568740074” and “011-41447376”; Email: “info@dilss.in”; Company name: “Di Logisolution”; Registered address: “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004”.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-remaining-globalfreight-brand-mentions-in-marketing-copy-headings-titles-e-g-home-about-hero-headings-and-why-choose-section-headings-with-the-updated-company-branding-so-the-site-consistently-reflects-di-logisolutions-di-logisolution-rather-than-globalfreight",
+      "title": "Replace remaining “GlobalFreight” brand mentions in marketing copy headings/titles (e.g., Home/About hero headings and “Why Choose …” section headings) with the updated company branding so the site consistently reflects “Di Logisolutions/Di Logisolution” rather than “GlobalFreight”.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -234,8 +324,26 @@
       "status": "pending"
     },
     {
-      "id": "AR-8",
-      "summary": "Rollback/unpublish the production deployment and remove the live web app (user does not want it live).",
+      "id": "AR-10",
+      "summary": "Keep the deployed site publicly accessible during development so the user can preview the working web app; do not enable the maintenance/offline gate unless explicitly requested.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Replace the hero/background image with a looping ship-at-sea background video (autoplay/muted) to match the freight/logistics vibe.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Update site branding: replace the current logo with the user-provided attached PNG logo asset.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Update company/contact details across the site (company name, office address, registered address, phone numbers, and email) per the user-provided information.",
       "reqIds": [],
       "status": "pending"
     }

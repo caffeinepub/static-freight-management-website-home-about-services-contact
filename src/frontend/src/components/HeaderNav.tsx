@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link, useRouterState } from '@tanstack/react-router';
-import { Menu, X, Package } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { useTheme } from 'next-themes';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -15,23 +14,20 @@ const navLinks = [
 
 export default function HeaderNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme } = useTheme();
   const router = useRouterState();
   const currentPath = router.location.pathname;
-
-  const logoSrc = theme === 'dark' 
-    ? '/assets/generated/freight-logo-dark.dim_512x512.png'
-    : '/assets/generated/freight-logo-light.dim_512x512.png';
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-            <Package className="h-6 w-6 text-primary-foreground" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">GlobalFreight</span>
+        <Link to="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
+          <img 
+            src="/assets/frgmtlogo.png" 
+            alt="Di Logisolutions" 
+            className="h-10 w-auto"
+          />
+          <span className="text-xl font-bold tracking-tight">Di Logisolutions</span>
         </Link>
 
         {/* Desktop Navigation */}

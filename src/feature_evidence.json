@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-an-app-wide-site-disabled-maintenance-mode-gate-that-when-enabled-prevents-the-marketing-website-ui-routes-header-footer-pages-from-rendering-and-instead-renders-a-single-standalone-screen-indicating-the-app-is-offline-unpublished",
-      "featureTitle": "Add an app-wide “site disabled / maintenance mode” gate that, when enabled, prevents the marketing website UI (routes, header, footer, pages) from rendering and instead renders a single standalone screen indicating the app is offline/unpublished.",
+      "featureId": "feature-add-the-user-provided-logo-image-frgmtlogo-png-to-the-frontend-static-assets-under-frontend-public-assets-and-replace-the-current-header-branding-icon-globalfreight-with-this-logo-image-and-the-company-name-di-logisolutions-the-header-logo-must-link-to-the-home-page-and-render-correctly-in-both-light-and-dark-themes",
+      "featureTitle": "Add the user-provided logo image `frgmtlogo.png` to the frontend static assets (under `frontend/public/assets/`) and replace the current header branding (icon + “GlobalFreight”) with this logo image and the company name “Di Logisolutions”. The header logo must link to the Home page and render correctly in both light and dark themes.",
       "files": [
-        "frontend/src/components/MaintenanceScreen.tsx",
-        "frontend/src/entry.tsx"
+        "frontend/src/components/HeaderNav.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,16 +15,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-22"
+        "REQ-33"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-the-disabled-maintenance-gate-as-a-simple-explicit-configuration-mechanism-that-can-be-changed-without-touching-immutable-frontend-paths-e-g-by-toggling-a-single-constant-or-reading-a-vite-environment-variable-in-the-non-immutable-entry-path-currently-used-by-the-app-frontend-src-entry-tsx",
-      "featureTitle": "Implement the disabled/maintenance gate as a simple, explicit configuration mechanism that can be changed without touching immutable frontend paths (e.g., by toggling a single constant or reading a Vite environment variable in the non-immutable entry path currently used by the app: `frontend/src/entry.tsx`).",
+      "featureId": "feature-update-company-contact-details-everywhere-they-appear-in-the-ui-footer-and-contact-details-components-at-minimum-to-use-the-exact-user-provided-information-office-address-di-logisolutions-a89-road-no-2-mahipalpur-new-delhi-110037-phone-91-9568740074-and-011-41447376-email-info-dilss-in-company-name-di-logisolution-registered-address-rzk-2-326-i-khasra-no-85-17-block-k-2-nihal-vihar-nangaloi-west-delhi-delhi-11004",
+      "featureTitle": "Update company/contact details everywhere they appear in the UI (footer and contact details components at minimum) to use the exact user-provided information: Office Address: “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”; Phone: “+91-9568740074” and “011-41447376”; Email: “info@dilss.in”; Company name: “Di Logisolution”; Registered address: “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004”.",
       "files": [
-        "frontend/src/entry.tsx",
-        "frontend/src/lib/maintenanceMode.ts"
+        "frontend/src/components/ContactDetailsCard.tsx",
+        "frontend/src/components/SiteFooter.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -35,7 +34,27 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-23"
+        "REQ-34"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-remaining-globalfreight-brand-mentions-in-marketing-copy-headings-titles-e-g-home-about-hero-headings-and-why-choose-section-headings-with-the-updated-company-branding-so-the-site-consistently-reflects-di-logisolutions-di-logisolution-rather-than-globalfreight",
+      "featureTitle": "Replace remaining “GlobalFreight” brand mentions in marketing copy headings/titles (e.g., Home/About hero headings and “Why Choose …” section headings) with the updated company branding so the site consistently reflects “Di Logisolutions/Di Logisolution” rather than “GlobalFreight”.",
+      "files": [
+        "frontend/src/components/SiteFooter.tsx",
+        "frontend/src/pages/AboutPage.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-35"
       ],
       "confidence": "high"
     }

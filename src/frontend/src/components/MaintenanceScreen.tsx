@@ -1,8 +1,9 @@
-import { AlertCircle } from 'lucide-react';
+import { ShieldOff } from 'lucide-react';
 
 /**
  * Standalone maintenance/offline screen displayed when the site is unpublished.
- * Shows a clear message that the site is not available and to check back later.
+ * This is the ONLY component rendered when maintenance mode is enabled.
+ * No navigation, no routes, no backend calls - just a clear offline message.
  */
 export function MaintenanceScreen() {
   return (
@@ -10,19 +11,19 @@ export function MaintenanceScreen() {
       <div className="max-w-md w-full text-center space-y-6">
         <div className="flex justify-center">
           <div className="rounded-full bg-muted p-6">
-            <AlertCircle className="h-16 w-16 text-muted-foreground" />
+            <ShieldOff className="h-16 w-16 text-muted-foreground" />
           </div>
         </div>
         
         <div className="space-y-3">
           <h1 className="text-3xl font-bold text-foreground">
-            Site Not Available
+            Site Unavailable
           </h1>
           <p className="text-lg text-muted-foreground">
-            This website is currently not published and is not available for public access.
+            This website is currently offline and cannot be accessed.
           </p>
-          <p className="text-base text-muted-foreground">
-            Please check back later.
+          <p className="text-sm text-muted-foreground/80">
+            All content and features are disabled.
           </p>
         </div>
       </div>

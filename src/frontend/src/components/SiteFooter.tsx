@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { Package, Mail, Phone, MapPin, Heart } from 'lucide-react';
+import { Mail, Phone, MapPin, Heart } from 'lucide-react';
 import { SiFacebook, SiX, SiLinkedin, SiInstagram } from 'react-icons/si';
 
 export default function SiteFooter() {
@@ -9,11 +9,13 @@ export default function SiteFooter() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                <Package className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold">GlobalFreight</span>
+            <div className="flex items-center gap-3">
+              <img 
+                src="/assets/frgmtlogo.png" 
+                alt="Di Logisolution" 
+                className="h-10 w-auto"
+              />
+              <span className="text-xl font-bold">Di Logisolution</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Your trusted partner in global logistics and freight management solutions.
@@ -84,15 +86,34 @@ export default function SiteFooter() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-start gap-2">
                 <Mail className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                <span>info@globalfreight.com</span>
+                <a href="mailto:info@dilss.in" className="hover:text-primary transition-colors">
+                  info@dilss.in
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <div className="flex flex-col gap-1">
+                  <a href="tel:+919568740074" className="hover:text-primary transition-colors">
+                    +91-9568740074
+                  </a>
+                  <a href="tel:01141447376" className="hover:text-primary transition-colors">
+                    011-41447376
+                  </a>
+                </div>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                <span>123 Logistics Ave, Suite 100<br />New York, NY 10001</span>
+                <div>
+                  <div className="font-medium mb-1">Office Address:</div>
+                  <span>Di LOGISOLUTIONS<br />A89, ROAD NO 2, MAHIPALPUR<br />NEW DELHI, 110037</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                <div>
+                  <div className="font-medium mb-1">Registered Address:</div>
+                  <span>RZK-2/326-I, Khasra No. 85/17,<br />Block K-2, Nihal Vihar, Nangaloi,<br />West Delhi, Delhi, 110041</span>
+                </div>
               </li>
             </ul>
           </div>

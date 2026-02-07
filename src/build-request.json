@@ -1,57 +1,85 @@
 {
   "kind": "build_request",
-  "title": "Disable public production UI (rollback substitute) by showing an Offline/Maintenance screen",
-  "priority": "high",
+  "title": "Update site branding logo and company contact/address details",
+  "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-22",
-      "text": "Add an app-wide “site disabled / maintenance mode” gate that, when enabled, prevents the marketing website UI (routes, header, footer, pages) from rendering and instead renders a single standalone screen indicating the app is offline/unpublished.",
+      "id": "REQ-33",
+      "text": "Add the user-provided logo image `frgmtlogo.png` to the frontend static assets (under `frontend/public/assets/`) and replace the current header branding (icon + “GlobalFreight”) with this logo image and the company name “Di Logisolutions”. The header logo must link to the Home page and render correctly in both light and dark themes.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-9"
+          "msg-user-2026-02-07"
         ],
         "quotes": [
-          "you made it to production. i dont want to publish. can you rollback"
+          "change the logo to attached png file."
         ]
       },
       "acceptanceCriteria": [
-        "When the disabled gate is enabled, loading any route (e.g., /, /about, /services, /contact, /tracking) displays only the offline/maintenance screen.",
-        "The offline/maintenance screen contains clear English text that the site is not available / not published and to check back later (no internal navigation links).",
-        "When the disabled gate is enabled, no page content from Home/About/Services/Contact/Tracking is visible and no calls to backend actors are initiated from the UI as part of rendering.",
-        "When the disabled gate is disabled, the app renders normally with existing routes and layout unchanged."
+        "A new static asset exists at a stable public path (e.g., `/assets/frgmtlogo.png` or similar) that matches the uploaded `frgmtlogo.png`.",
+        "The header shows the new logo image instead of the current Package icon block and no longer displays “GlobalFreight”.",
+        "The company name displayed in the header is “Di Logisolutions”.",
+        "Header branding remains visible/legible in both light and dark theme modes."
       ]
     },
     {
-      "id": "REQ-23",
-      "text": "Implement the disabled/maintenance gate as a simple, explicit configuration mechanism that can be changed without touching immutable frontend paths (e.g., by toggling a single constant or reading a Vite environment variable in the non-immutable entry path currently used by the app: `frontend/src/entry.tsx`).",
+      "id": "REQ-34",
+      "text": "Update company/contact details everywhere they appear in the UI (footer and contact details components at minimum) to use the exact user-provided information: Office Address: “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”; Phone: “+91-9568740074” and “011-41447376”; Email: “info@dilss.in”; Company name: “Di Logisolution”; Registered address: “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004”.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-9"
+          "msg-user-2026-02-07"
         ],
         "quotes": [
-          "can you rollback"
+          "office Address: Di LOGISOLUTIONS\nA89, ROAD NO 2, MAHIPALPUR\nNEW DELHI,110037 PHONE NO:- +91-9568740074, 011-41447376\nEmail:- info@dilss.in\nCompany name: Di Logisolution  Registered address: RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004  update these detais"
         ]
       },
       "acceptanceCriteria": [
-        "The toggle point for enabling/disabling the maintenance screen is located in `frontend/src/entry.tsx` (or another non-immutable file imported by it).",
-        "No files under `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, `frontend/src/components/ui` are modified.",
-        "`frontend/index.html` continues to load `/src/entry.tsx` as the single entry module."
+        "The footer contact section shows email `info@dilss.in`, phone numbers `+91-9568740074` and `011-41447376`, and the office address in New Delhi exactly as provided.",
+        "The Contact page details card(s) show the updated email, phone number(s), and office address exactly as provided.",
+        "Email links use `mailto:info@dilss.in` and phone links use `tel:+919568740074` and `tel:01141447376` (or equivalent valid tel URIs) while displaying the numbers as provided.",
+        "The registered address is visible somewhere appropriate in the existing contact/company info UI (footer and/or contact details), labeled clearly as “Registered address”."
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "text": "Replace remaining “GlobalFreight” brand mentions in marketing copy headings/titles (e.g., Home/About hero headings and “Why Choose …” section headings) with the updated company branding so the site consistently reflects “Di Logisolutions/Di Logisolution” rather than “GlobalFreight”.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-2026-02-07"
+        ],
+        "quotes": [
+          "Company name: Di Logisolution ... update these detais"
+        ]
+      },
+      "acceptanceCriteria": [
+        "No prominent header/footer or page hero titles display the old brand name “GlobalFreight”.",
+        "Key headings that previously referenced the old brand are updated to the new branding while keeping the overall page structure unchanged."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, and anything under `frontend/src/components/ui`.",
-    "Backend must remain a single Motoko actor in `backend/main.mo`; do not introduce additional backend services.",
-    "This change must not rely on any ability to programmatically “unpublish” or “rollback” a production deployment; instead, it must be achieved via app behavior changes within this codebase."
+    "Do not modify any files in the immutable frontend paths listed in SYSTEM_CONTEXT (e.g., `frontend/src/main.tsx`, `frontend/src/hooks/useActor.ts`, and `frontend/src/components/ui`).",
+    "Keep all user-facing text in English.",
+    "Do not introduce new backend canisters/services; changes are frontend-only for branding/contact info."
   ],
   "nonGoals": [
-    "Do not implement deployment tooling changes (e.g., DFX rollback, canister uninstall, domain unmapping) because they are outside the application codebase.",
-    "Do not add new product features unrelated to disabling the public UI (no new pages, tracking functionality, or content redesign)."
+    "Do not implement new functional features (e.g., payments, user accounts, tracking enhancements) as part of this change.",
+    "Do not redesign the entire site theme/layout beyond what is required to display the new logo and updated details."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

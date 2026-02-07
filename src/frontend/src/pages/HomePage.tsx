@@ -50,15 +50,21 @@ const highlights = [
 export default function HomePage() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section with Background */}
+      {/* Hero Section with Background Video */}
       <section className="relative overflow-hidden">
-        {/* Background Image */}
+        {/* Background Video */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="/assets/generated/ship-container-bg.dim_1920x1080.png"
-            alt=""
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/assets/generated/ship-container-bg.dim_1920x1080.png"
             className="h-full w-full object-cover"
-          />
+            aria-hidden="true"
+          >
+            <source src="/assets/generated/ship-at-sea-loop.dim_1920x1080.mp4" type="video/mp4" />
+          </video>
           {/* Darker overlay for better text contrast */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/65 to-black/60" />
         </div>
@@ -110,7 +116,7 @@ export default function HomePage() {
       <section className="border-t bg-background py-16 md:py-24">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="mb-4">Why Choose GlobalFreight</h2>
+            <h2 className="mb-4">Why Choose Di Logisolutions</h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
               We deliver excellence in every shipment with our commitment to reliability, security, and customer satisfaction.
             </p>

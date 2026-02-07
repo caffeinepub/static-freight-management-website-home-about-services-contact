@@ -1,28 +1,31 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Target, Users, Award, TrendingUp, Globe2, Shield } from 'lucide-react';
+import { Target, Users, Award, TrendingUp } from 'lucide-react';
 import StatsStrip from '../components/StatsStrip';
 
 const values = [
   {
     icon: Target,
-    title: 'Customer Focus',
-    description: 'We prioritize our clients\' needs and deliver tailored solutions that exceed expectations.',
+    title: 'Our Mission',
+    description:
+      'To provide seamless, reliable, and innovative logistics solutions that empower businesses to thrive in the global marketplace.',
   },
   {
-    icon: Shield,
-    title: 'Reliability',
-    description: 'Consistent, dependable service you can count on for every shipment, every time.',
+    icon: Users,
+    title: 'Customer First',
+    description:
+      'We prioritize our clients\' needs, offering personalized service and support to ensure their complete satisfaction.',
   },
   {
     icon: Award,
     title: 'Excellence',
-    description: 'Committed to the highest standards in logistics operations and customer service.',
+    description:
+      'We maintain the highest standards in every aspect of our operations, from handling to delivery.',
   },
   {
-    icon: Globe2,
-    title: 'Global Reach',
-    description: 'Extensive network spanning continents to connect your business worldwide.',
+    icon: TrendingUp,
+    title: 'Innovation',
+    description:
+      'We continuously invest in technology and processes to stay ahead in the rapidly evolving logistics industry.',
   },
 ];
 
@@ -32,12 +35,20 @@ const whyChooseUs = [
     description: 'Over 25 years of experience in international freight and logistics management.',
   },
   {
-    title: 'Advanced Technology',
-    description: 'State-of-the-art tracking systems and digital platforms for complete visibility.',
+    title: 'Global Network',
+    description: 'Strategic partnerships with carriers and agents in 150+ countries worldwide.',
+  },
+  {
+    title: 'Technology Driven',
+    description: 'Advanced tracking systems and digital platforms for real-time shipment visibility.',
   },
   {
     title: 'Competitive Pricing',
-    description: 'Optimized routes and strong carrier relationships ensure the best rates.',
+    description: 'Optimized routes and strong carrier relationships ensure cost-effective solutions.',
+  },
+  {
+    title: 'Compliance & Security',
+    description: 'Full regulatory compliance and comprehensive insurance coverage for peace of mind.',
   },
   {
     title: 'Dedicated Support',
@@ -49,12 +60,12 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="border-b bg-gradient-to-br from-background via-background to-muted/30 py-16 md:py-24">
+      <section className="border-b bg-muted/30 py-16 md:py-24">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-6">About GlobalFreight</h1>
+            <h1 className="mb-6">About Di Logisolutions</h1>
             <p className="text-lg text-muted-foreground md:text-xl">
-              A trusted leader in global logistics, connecting businesses worldwide with reliable, efficient, and innovative freight solutions since 1999.
+              For over two decades, we've been connecting businesses to the world through reliable, efficient, and innovative freight solutions. Our commitment to excellence has made us a trusted partner for companies of all sizes.
             </p>
           </div>
         </div>
@@ -63,51 +74,20 @@ export default function AboutPage() {
       {/* Stats Strip */}
       <StatsStrip />
 
-      {/* Company Overview */}
-      <section className="border-b py-16 md:py-24">
-        <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <h2 className="mb-6">Our Story</h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  Founded in 1999, GlobalFreight began with a simple mission: to make international shipping accessible, reliable, and efficient for businesses of all sizes. What started as a small freight forwarding operation has grown into a comprehensive logistics provider serving clients across 150+ countries.
-                </p>
-                <p>
-                  Today, we handle over 50,000 shipments annually, ranging from small parcels to oversized project cargo. Our success is built on strong relationships with carriers, customs authorities, and most importantly, our valued clients who trust us with their most critical shipments.
-                </p>
-                <p>
-                  As we continue to grow, we remain committed to innovation, sustainability, and delivering exceptional service that helps our clients succeed in the global marketplace.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <div className="aspect-[4/3] w-full overflow-hidden rounded-lg shadow-medium">
-                <img
-                  src="/assets/generated/freight-hero.dim_1920x800.png"
-                  alt="GlobalFreight operations"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Mission & Values */}
-      <section className="border-b bg-muted/30 py-16 md:py-24">
+      <section className="border-b py-16 md:py-24">
         <div className="container">
           <div className="mb-12 text-center">
             <h2 className="mb-4">Our Mission & Values</h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Guided by our core values, we strive to be the most trusted partner in global logistics.
+              Guided by our core principles, we strive to deliver exceptional service and build lasting partnerships.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2">
             {values.map((value, index) => (
-              <Card key={index}>
+              <Card key={index} className="transition-shadow hover:shadow-soft">
                 <CardHeader>
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                     <value.icon className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle className="text-xl">{value.title}</CardTitle>
@@ -122,27 +102,28 @@ export default function AboutPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 md:py-24">
+      <section className="bg-muted/30 py-16 md:py-24">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="mb-4">Why Choose Us</h2>
+            <h2 className="mb-4">What Sets Di Logisolutions Apart</h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              What sets GlobalFreight apart in the competitive logistics industry.
+              Our unique combination of experience, technology, and customer focus makes us the ideal logistics partner.
             </p>
           </div>
-          <div className="mx-auto max-w-4xl">
-            <div className="grid gap-8 md:grid-cols-2">
-              {whyChooseUs.map((item, index) => (
-                <div key={index} className="space-y-2">
-                  <h3 className="text-xl font-semibold">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.description}</p>
-                </div>
-              ))}
-            </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {whyChooseUs.map((item, index) => (
+              <Card key={index} className="transition-shadow hover:shadow-soft">
+                <CardHeader>
+                  <CardTitle className="text-lg">{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{item.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
     </div>
   );
 }
-

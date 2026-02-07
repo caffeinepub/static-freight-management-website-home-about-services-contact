@@ -1,48 +1,74 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Maintenance-mode gate to disable public marketing UI",
+  "title": "Update branding logo and company contact/address details",
   "requirements": [
     {
-      "id": "REQ-22",
-      "summary": "Add an app-wide maintenance gate that replaces all marketing routes/layout with a standalone offline screen and prevents any normal UI rendering when enabled.",
+      "id": "REQ-33",
+      "summary": "Add uploaded logo as a public asset and update header branding to use the new logo + company name “Di Logisolutions”, with correct light/dark rendering and Home link.",
       "acceptanceCriteria": [
-        "When the disabled gate is enabled, loading any route (e.g., /, /about, /services, /contact, /tracking) displays only the offline/maintenance screen.",
-        "The offline/maintenance screen contains clear English text that the site is not available / not published and to check back later (no internal navigation links).",
-        "When the disabled gate is enabled, no page content from Home/About/Services/Contact/Tracking is visible and no calls to backend actors are initiated from the UI as part of rendering.",
-        "When the disabled gate is disabled, the app renders normally with existing routes and layout unchanged."
+        "A new static asset exists at a stable public path (e.g., `/assets/frgmtlogo.png` or similar) that matches the uploaded `frgmtlogo.png`.",
+        "The header shows the new logo image instead of the current Package icon block and no longer displays “GlobalFreight”.",
+        "The company name displayed in the header is “Di Logisolutions”.",
+        "Header branding remains visible/legible in both light and dark theme modes."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/MaintenanceScreen.tsx",
+          "path": "frontend/public/assets/frgmtlogo.png",
           "operation": "create",
-          "description": "Create a standalone Maintenance/Offline screen component with clear English copy indicating the site is offline/unpublished and to check back later. Ensure it contains no internal navigation links and does not import router/auth/actor hooks. Verify the component's usage instructions before implementing."
+          "description": "Add the user-provided `frgmtlogo.png` into static assets so it is served from a stable public path (e.g., `/assets/frgmtlogo.png`)."
         },
         {
-          "path": "frontend/src/entry.tsx",
+          "path": "frontend/src/components/HeaderNav.tsx",
           "operation": "modify",
-          "description": "Wire an app-wide gate so that when maintenance is enabled, the app renders only MaintenanceScreen and does not mount App/Router, header/footer, pages, or data/auth providers (to avoid initiating backend actor calls during render). When disabled, keep existing render path unchanged. Verify the component's usage instructions before implementing."
+          "description": "Replace the current icon + “GlobalFreight” header branding with the new logo image from `/assets/frgmtlogo.png` and the company name “Di Logisolutions”, keep the branding wrapped in a TanStack Router <Link> to Home, and ensure the logo remains legible in both light and dark themes (e.g., via theme-aware container/background/filters as needed)."
         }
       ]
     },
     {
-      "id": "REQ-23",
-      "summary": "Implement the maintenance gate as a single explicit toggle controlled from entry.tsx (or a file it imports), without modifying immutable frontend paths and without changing index.html’s entry module.",
+      "id": "REQ-34",
+      "summary": "Update all UI company/contact details (footer and contact details card at minimum) to the exact provided office address, registered address, phones, and email with proper mailto/tel links.",
       "acceptanceCriteria": [
-        "The toggle point for enabling/disabling the maintenance screen is located in `frontend/src/entry.tsx` (or another non-immutable file imported by it).",
-        "No files under `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, `frontend/src/components/ui` are modified.",
-        "`frontend/index.html` continues to load `/src/entry.tsx` as the single entry module."
+        "The footer contact section shows email `info@dilss.in`, phone numbers `+91-9568740074` and `011-41447376`, and the office address in New Delhi exactly as provided.",
+        "The Contact page details card(s) show the updated email, phone number(s), and office address exactly as provided.",
+        "Email links use `mailto:info@dilss.in` and phone links use `tel:+919568740074` and `tel:01141447376` (or equivalent valid tel URIs) while displaying the numbers as provided.",
+        "The registered address is visible somewhere appropriate in the existing contact/company info UI (footer and/or contact details), labeled clearly as “Registered address”."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/lib/maintenanceMode.ts",
-          "operation": "create",
-          "description": "Add a simple configuration helper (e.g., read a Vite environment variable and/or a single exported constant) that determines whether maintenance mode is enabled; this module must be imported by frontend/src/entry.tsx. Verify the component's usage instructions before implementing."
+          "path": "frontend/src/components/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Update footer company/contact text to: Email `info@dilss.in` (as a `mailto:info@dilss.in` link), Phone `+91-9568740074` and `011-41447376` (as `tel:+919568740074` and `tel:01141447376` links while displaying the numbers as provided), Office Address exactly “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”, and add the Registered address exactly “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004” labeled as “Registered address”. Also replace any “GlobalFreight” company name mention in the footer brand block with “Di Logisolution” where the footer displays the company name."
         },
         {
-          "path": "frontend/src/entry.tsx",
+          "path": "frontend/src/components/ContactDetailsCard.tsx",
           "operation": "modify",
-          "description": "Place the explicit toggle point in this file (or via the new helper it imports) so switching maintenance mode requires changing only this non-immutable entry path/config. Do not modify any immutable paths and keep frontend/index.html loading /src/entry.tsx. Verify the component's usage instructions before implementing."
+          "description": "Update the Contact Information card to display the provided email, both phone numbers (each as its own clickable `tel:` link), and the office address exactly as provided; add the registered address labeled clearly as “Registered address” in an appropriate place in the details UI; ensure the displayed values match the exact text and the link URIs match the acceptance criteria."
+        }
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "summary": "Replace remaining “GlobalFreight” brand mentions in prominent marketing headings/titles (Home/About hero and section headings) with the updated “Di Logisolutions/Di Logisolution” branding while keeping structure unchanged.",
+      "acceptanceCriteria": [
+        "No prominent header/footer or page hero titles display the old brand name “GlobalFreight”.",
+        "Key headings that previously referenced the old brand are updated to the new branding while keeping the overall page structure unchanged."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Replace prominent Home page marketing headings/titles that mention “GlobalFreight” (e.g., the hero headline and the “Why Choose …” heading) with the updated branding (“Di Logisolutions” or “Di Logisolution” as appropriate) without changing the existing page layout/structure."
+        },
+        {
+          "path": "frontend/src/pages/AboutPage.tsx",
+          "operation": "modify",
+          "description": "Replace prominent About page hero title “About GlobalFreight” and other key marketing copy references (e.g., “What sets GlobalFreight apart…”, image alt text if present) with the updated branding (“Di Logisolutions” or “Di Logisolution” as appropriate) while keeping the page structure unchanged."
+        },
+        {
+          "path": "frontend/src/components/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Ensure any remaining footer brand mentions in headings/titles (e.g., the footer brand name text) no longer use “GlobalFreight” and instead use the updated branding consistently (aligning with other UI updates from REQ-34)."
         }
       ]
     }

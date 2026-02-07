@@ -1,39 +1,53 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-07T03:11:43.434Z",
+  "generatedAt": "2026-02-07T06:07:22.944Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-22",
-        "summary": "Add an app-wide “site disabled / maintenance mode” gate that, when enabled, prevents the marketing website UI (routes, header, footer, pages) from rendering and instead renders a single standalone screen indicating the app is offline/unpublished.",
+        "id": "REQ-33",
+        "summary": "Add the user-provided logo image `frgmtlogo.png` to the frontend static assets (under `frontend/public/assets/`) and replace the current header branding (icon + “GlobalFreight”) with this logo image and the company name “Di Logisolutions”. The header logo must link to the Home page and render correctly in both light and dark themes.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/MaintenanceScreen.tsx",
-          "frontend/src/entry.tsx"
+          "frontend/public/assets/frgmtlogo.png",
+          "frontend/src/components/HeaderNav.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/MaintenanceScreen.tsx",
-          "frontend/src/entry.tsx"
+          "frontend/src/components/HeaderNav.tsx"
         ]
       },
       {
-        "id": "REQ-23",
-        "summary": "Implement the disabled/maintenance gate as a simple, explicit configuration mechanism that can be changed without touching immutable frontend paths (e.g., by toggling a single constant or reading a Vite environment variable in the non-immutable entry path currently used by the app: `frontend/src/entry.tsx`).",
+        "id": "REQ-34",
+        "summary": "Update company/contact details everywhere they appear in the UI (footer and contact details components at minimum) to use the exact user-provided information: Office Address: “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”; Phone: “+91-9568740074” and “011-41447376”; Email: “info@dilss.in”; Company name: “Di Logisolution”; Registered address: “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004”.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/lib/maintenanceMode.ts",
-          "frontend/src/entry.tsx"
+          "frontend/src/components/SiteFooter.tsx",
+          "frontend/src/components/ContactDetailsCard.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/lib/maintenanceMode.ts",
-          "frontend/src/entry.tsx"
+          "frontend/src/components/SiteFooter.tsx",
+          "frontend/src/components/ContactDetailsCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-35",
+        "summary": "Replace remaining “GlobalFreight” brand mentions in marketing copy headings/titles (e.g., Home/About hero headings and “Why Choose …” section headings) with the updated company branding so the site consistently reflects “Di Logisolutions/Di Logisolution” rather than “GlobalFreight”.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/AboutPage.tsx",
+          "frontend/src/components/SiteFooter.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/AboutPage.tsx",
+          "frontend/src/components/SiteFooter.tsx"
         ]
       }
     ]
@@ -43,9 +57,11 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/MaintenanceScreen.tsx",
-    "frontend/src/entry.tsx",
-    "frontend/src/lib/maintenanceMode.ts",
+    "frontend/src/components/ContactDetailsCard.tsx",
+    "frontend/src/components/HeaderNav.tsx",
+    "frontend/src/components/SiteFooter.tsx",
+    "frontend/src/pages/AboutPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

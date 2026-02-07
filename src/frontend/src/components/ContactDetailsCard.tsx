@@ -16,10 +16,10 @@ export default function ContactDetailsCard() {
             <div>
               <div className="font-medium">Email</div>
               <a
-                href="mailto:info@globalfreight.com"
+                href="mailto:info@dilss.in"
                 className="text-sm text-muted-foreground hover:text-primary"
               >
-                info@globalfreight.com
+                info@dilss.in
               </a>
             </div>
           </div>
@@ -30,12 +30,20 @@ export default function ContactDetailsCard() {
             </div>
             <div>
               <div className="font-medium">Phone</div>
-              <a
-                href="tel:+15551234567"
-                className="text-sm text-muted-foreground hover:text-primary"
-              >
-                +1 (555) 123-4567
-              </a>
+              <div className="flex flex-col gap-1">
+                <a
+                  href="tel:+919568740074"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
+                  +91-9568740074
+                </a>
+                <a
+                  href="tel:01141447376"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
+                  011-41447376
+                </a>
+              </div>
             </div>
           </div>
 
@@ -44,11 +52,29 @@ export default function ContactDetailsCard() {
               <MapPin className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <div className="font-medium">Office</div>
+              <div className="font-medium">Office Address</div>
               <p className="text-sm text-muted-foreground">
-                123 Logistics Ave, Suite 100
+                Di LOGISOLUTIONS
                 <br />
-                New York, NY 10001
+                A89, ROAD NO 2, MAHIPALPUR
+                <br />
+                NEW DELHI, 110037
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10">
+              <MapPin className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <div className="font-medium">Registered Address</div>
+              <p className="text-sm text-muted-foreground">
+                RZK-2/326-I, Khasra No. 85/17,
+                <br />
+                Block K-2, Nihal Vihar, Nangaloi,
+                <br />
+                West Delhi, Delhi, 110041
               </p>
             </div>
           </div>
@@ -86,4 +112,3 @@ export default function ContactDetailsCard() {
     </>
   );
 }
-
