@@ -1,0 +1,182 @@
+{
+  "kind": "build_request",
+  "title": "Static Freight Management Website (Home, About, Services, Contact)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a static marketing website for a freight management company with four pages: Home, About Us, Services, and Contact Us.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "create a freight management website static. with lot of freight related services offering. with for pages home about us services and contact us"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The site has 4 distinct routes/pages: Home, About Us, Services, Contact Us.",
+        "All pages render without backend dependencies and work as a static brochure site.",
+        "Navigation between pages works via a consistent header navigation on desktop and mobile."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement a consistent site layout (header with navigation, main content area, footer) shared across all pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "with for pages home about us services and contact us"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Header includes the company name/logo area and links to Home, About Us, Services, Contact Us.",
+        "Footer appears on every page and includes at minimum: company name, a short tagline, and basic contact placeholders (phone/email/location).",
+        "Layout is responsive and readable on mobile, tablet, and desktop widths."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Home page: include a hero section, trust/credibility highlights, and call-to-action sections that direct users to Services and Contact Us.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "create a freight management website static"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home page includes a hero with a headline, subheadline, and primary CTA button linking to Contact Us.",
+        "Home page includes 3–6 credibility highlight items (e.g., on-time delivery, global coverage, tracking, customs expertise) presented as cards or a grid.",
+        "Home page includes a brief services preview section linking to the Services page."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "About Us page: provide company overview content sections (mission, values, what makes the company different) and a simple timeline or stats strip.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "about us"
+        ]
+      },
+      "acceptanceCriteria": [
+        "About Us page includes at least: Company Overview, Mission & Values, and Why Choose Us sections.",
+        "About Us page includes either a timeline component (3–5 milestones) or a stats strip (e.g., years in business, shipments handled, countries served)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Services page: showcase many freight-related services as clearly structured categories with service cards and brief descriptions.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "with lot of freight related services offering."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Services page includes multiple categories (e.g., Air Freight, Ocean Freight, Road/Trucking, Rail, Customs Brokerage, Warehousing, Last-mile, Project Cargo, Freight Insurance, Supply Chain Consulting).",
+        "Each service is displayed as a card/list item with a title and 1–3 sentence description.",
+        "Services page provides a CTA area linking to Contact Us for quotes/consultations."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Contact Us page: include a static contact form with client-side validation and a non-sending submission experience (e.g., success message) plus visible company contact details.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "contact us"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Contact form includes: Name, Email, Phone (optional), Service Interested In (select), Message.",
+        "Client-side validation: required fields and valid email format; show inline error messages.",
+        "On submit, the app shows a success state (no external email/service integration).",
+        "Page includes visible contact details (email, phone, office address placeholders) and business hours placeholders."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Apply a coherent visual theme across the site (color palette, typography, spacing, and component styling) suitable for a freight/logistics brand; avoid a blue/purple default look.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "create a freight management website static"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A consistent design system is evident across pages (same button styles, card styles, headings, spacing scale).",
+        "Color palette is not the default blue/purple; use a distinct logistics-appropriate theme (e.g., charcoal + safety orange accents or deep green + sand accents).",
+        "All pages look visually consistent and polished with Tailwind styling."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add static image assets (generated) for branding and page visuals, and render them from the frontend public assets folder.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "create a freight management website static"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images are stored under frontend/public/assets/generated and referenced directly by the frontend.",
+        "Hero image and logo appear on the site without being served through the backend.",
+        "Images are optimized for web display (appropriate dimensions and file types)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Do not add third-party authentication or external email/messaging integrations; Contact form must remain static (client-side only).",
+    "Do not introduce additional backend services; keep the site static without requiring Motoko canister logic."
+  ],
+  "nonGoals": [
+    "User accounts, login, or Internet Identity integration.",
+    "Quote pricing calculators or shipment tracking with real data.",
+    "Form submissions sending emails or storing messages in a database/canister."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Freight logistics hero banner with cargo ship, airplane, and trucks in a modern flat/photoreal blended style (freight-hero.dim_1920x800.png)",
+      "Minimal logistics company logo mark with abstract container/truck motif, dark-on-light version (freight-logo-light.dim_512x512.png)",
+      "Minimal logistics company logo mark with abstract container/truck motif, light-on-dark version (freight-logo-dark.dim_512x512.png)",
+      "Set of 10 simple line/duotone service icons (air, ocean, trucking, rail, customs, warehousing, last-mile, project cargo, insurance, consulting) (freight-service-icons.dim_1024x1024.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "Use English for all user-facing website copy."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

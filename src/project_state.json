@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Static freight management website with multiple freight-related service offerings and four pages (Home, About Us, Services, Contact Us).",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Freight logistics hero banner with cargo ship, airplane, and trucks in a modern flat/photoreal blended style (freight-hero.dim_1920x800.png)\n- Minimal logistics company logo mark with abstract container/truck motif, dark-on-light version (freight-logo-light.dim_512x512.png)\n- Minimal logistics company logo mark with abstract container/truck motif, light-on-dark version (freight-logo-dark.dim_512x512.png)\n- Set of 10 simple line/duotone service icons (air, ocean, trucking, rail, customs, warehousing, last-mile, project cargo, insurance, consulting) (freight-service-icons.dim_1024x1024.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-static-marketing-website-for-a-freight-management-company-with-four-pages-home-about-us-services-and-contact-us",
+      "title": "Create a static marketing website for a freight management company with four pages: Home, About Us, Services, and Contact Us.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-consistent-site-layout-header-with-navigation-main-content-area-footer-shared-across-all-pages",
+      "title": "Implement a consistent site layout (header with navigation, main content area, footer) shared across all pages.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-home-page-include-a-hero-section-trust-credibility-highlights-and-call-to-action-sections-that-direct-users-to-services-and-contact-us",
+      "title": "Home page: include a hero section, trust/credibility highlights, and call-to-action sections that direct users to Services and Contact Us.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-about-us-page-provide-company-overview-content-sections-mission-values-what-makes-the-company-different-and-a-simple-timeline-or-stats-strip",
+      "title": "About Us page: provide company overview content sections (mission, values, what makes the company different) and a simple timeline or stats strip.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-services-page-showcase-many-freight-related-services-as-clearly-structured-categories-with-service-cards-and-brief-descriptions",
+      "title": "Services page: showcase many freight-related services as clearly structured categories with service cards and brief descriptions.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-contact-us-page-include-a-static-contact-form-with-client-side-validation-and-a-non-sending-submission-experience-e-g-success-message-plus-visible-company-contact-details",
+      "title": "Contact Us page: include a static contact form with client-side validation and a non-sending submission experience (e.g., success message) plus visible company contact details.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-visual-theme-across-the-site-color-palette-typography-spacing-and-component-styling-suitable-for-a-freight-logistics-brand-avoid-a-blue-purple-default-look",
+      "title": "Apply a coherent visual theme across the site (color palette, typography, spacing, and component styling) suitable for a freight/logistics brand; avoid a blue/purple default look.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-static-image-assets-generated-for-branding-and-page-visuals-and-render-them-from-the-frontend-public-assets-folder",
+      "title": "Add static image assets (generated) for branding and page visuals, and render them from the frontend public assets folder.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a static freight management website with four pages: Home, About Us, Services, Contact Us, showcasing many freight-related services.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Static Freight Management Website (Home, About, Services, Contact)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

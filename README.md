@@ -1,2 +1,3 @@
-# static-freight-management-website-home-about-services-contact
-Exported from Caffeine project: Static Freight Management Website (Home, About, Services, Contact)
+## Static Freight Management Website (Home, About, Services, Contact)
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

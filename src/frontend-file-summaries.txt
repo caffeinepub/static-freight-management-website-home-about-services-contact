@@ -1,0 +1,18 @@
+{
+  "frontend/src/index.css": "Global styles with OKLCH color system using charcoal base and safety orange accents for a professional logistics theme, supporting both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration with extended theme for logistics branding, custom container padding, Inter font family, and custom animations.",
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup for four routes (Home, About, Services, Contact) wrapped in ThemeProvider and SiteLayout.",
+  "frontend/src/components/SiteLayout.tsx": "Layout wrapper component that provides consistent header navigation and footer across all pages.",
+  "frontend/src/components/HeaderNav.tsx": "Responsive header navigation with logo, desktop menu, mobile sheet menu, and Get Quote CTA button.",
+  "frontend/src/components/SiteFooter.tsx": "Site footer with company info, quick links, services list, contact details, social media icons, and caffeine.ai attribution.",
+  "frontend/src/pages/HomePage.tsx": "Home page with hero section, stats, credibility highlights grid, services preview, and CTA sections showcasing GlobalFreight's value proposition.",
+  "frontend/src/components/ServicePreviewGrid.tsx": "Reusable grid component displaying four main service categories (Air, Ocean, Road, Warehousing) as preview cards.",
+  "frontend/src/pages/AboutPage.tsx": "About page with company story, stats strip, mission & values cards, and why choose us section.",
+  "frontend/src/components/StatsStrip.tsx": "Statistics banner component displaying key metrics (shipments, countries, clients, on-time delivery) with icons.",
+  "frontend/src/pages/ServicesPage.tsx": "Comprehensive services page showcasing 10 freight service categories with detailed service cards and descriptions.",
+  "frontend/src/components/ServiceCategorySection.tsx": "Reusable component for rendering a service category with icon, title, and grid of service cards.",
+  "frontend/src/pages/ContactPage.tsx": "Contact page with validated form (name, email, phone, service, message), success state, and contact details sidebar.",
+  "frontend/src/components/ContactDetailsCard.tsx": "Contact information cards displaying email, phone, office address, and business hours with icons.",
+  "frontend/src/lib/contactValidation.ts": "Client-side form validation utility for contact form with required field and email format checks.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as the static site requires no backend queries."
+}

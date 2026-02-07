@@ -1,0 +1,74 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-07T01:22:32.796Z",
+  "summary": "Most requested brochure-site features appear implemented (4 routes, shared layout, themed styling, services structure, and static contact form with client-side validation). However, the diff introduces Internet Identity/auth-related plumbing, actor/query infrastructure, and a backend Motoko canister stub—items explicitly called out as non-goals/constraints for a static marketing site.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity authentication integration (provider/hook usage and AuthClient-based logic) despite being a non-goal and constraint.",
+      "reason": "BuildRequest explicitly lists user accounts/login/Internet Identity integration as non-goals; the diff adds and wires an InternetIdentityProvider and related hook implementation.",
+      "evidence": [
+        "frontend/src/main.tsx",
+        "frontend/src/hooks/useInternetIdentity.ts"
+      ]
+    },
+    {
+      "description": "Backend actor integration and react-query-based actor fetching for authenticated/anonymous identities.",
+      "reason": "BuildRequest requires a static brochure site with no backend dependencies and no Motoko canister logic; the diff adds useActor that creates an actor and depends on identity.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "Introduced a backend Motoko canister stub (backend/main.mo).",
+      "reason": "Constraint says to keep the site static without requiring Motoko canister logic / do not introduce additional backend services; adding a backend canister file is unrequested and risks implying backend dependence.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Dark/light theme toggling infrastructure via next-themes ThemeProvider and theme-dependent logo selection logic.",
+      "reason": "Not requested in requirements; also introduces theme logic in header (even if logoSrc currently isn’t rendered).",
+      "evidence": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/HeaderNav.tsx"
+      ]
+    },
+    {
+      "description": "Added social media icon links in the footer using react-icons.",
+      "reason": "Footer requirements only mention company name, tagline, and basic contact placeholders; social icon links and react-icons usage were not requested.",
+      "evidence": [
+        "frontend/src/components/SiteFooter.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/ContactDetailsCard.tsx",
+    "frontend/src/components/HeaderNav.tsx",
+    "frontend/src/components/ServiceCategorySection.tsx",
+    "frontend/src/components/ServicePreviewGrid.tsx",
+    "frontend/src/components/SiteFooter.tsx",
+    "frontend/src/components/SiteLayout.tsx",
+    "frontend/src/components/StatsStrip.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/contactValidation.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/AboutPage.tsx",
+    "frontend/src/pages/ContactPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/ServicesPage.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
