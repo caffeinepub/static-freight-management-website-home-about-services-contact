@@ -1,11 +1,25 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 17,
   "summary": "Static freight management website with multiple freight-related service offerings and four pages (Home, About Us, Services, Contact Us).",
-  "architectural_notes": [],
-  "known_issues": [],
-  "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Freight logistics hero banner with cargo ship, airplane, and trucks in a modern flat/photoreal blended style (freight-hero.dim_1920x800.png)\n- Minimal logistics company logo mark with abstract container/truck motif, dark-on-light version (freight-logo-light.dim_512x512.png)\n- Minimal logistics company logo mark with abstract container/truck motif, light-on-dark version (freight-logo-dark.dim_512x512.png)\n- Set of 10 simple line/duotone service icons (air, ocean, trucking, rail, customs, warehousing, last-mile, project cargo, insurance, consulting) (freight-service-icons.dim_1024x1024.png)",
+  "architectural_notes": [
+    "Hero section should only use the ship-with-containers background image; remove the additional right-side hero image (freight-hero.dim_1920x800.png).",
+    "Ensure text over hero/background images meets accessible contrast (adjust overlay/text colors as needed so text is not hidden).",
+    "Shipment tracking page should present as 'Coming soon' with disabled submit button until tracking is implemented.",
+    "Hero headline, supporting paragraph, and stats labels on the ship-with-containers hero background should use a light/white text color to maintain contrast against the image.",
+    "Frontend project should be runnable locally: ensure frontend/package.json contains proper Vite (and app) dependencies and standard scripts (dev/build/preview), so `pnpm install` + `pnpm run dev` works on a fresh download.",
+    "Ensure frontend/package.json includes all actual app dependencies referenced in code (e.g., @tanstack/react-query and any router libs) so imports resolve and `pnpm run dev` works.",
+    "Blank page likely caused by `frontend/src/main.tsx` rendering nothing: `ReactDOM.createRoot(...).render()` is missing its JSX tree (e.g., `<React.StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></React.StrictMode>`). Ensure `main.tsx` mounts `<App />` (and providers) into `#root`."
+  ],
+  "known_issues": [
+    "An extra hero image (freight-hero.dim_1920x800.png) is appearing on the right side and should be removed (user chose option 1).",
+    "Text on the background image is hard to read/hidden due to insufficient color contrast and needs correction.",
+    "Hero section headline/paragraph/stats text is not readable against the background; set to white/light (and/or adjust overlay) for sufficient contrast.",
+    "Downloaded project’s frontend/package.json appears incomplete/incorrect for local dev (no/incorrect scripts or missing Vite dependency), causing `pnpm run dev` / `vite` command failures on Windows.",
+    "Local dev build fails due to missing dependency/import for `@tanstack/react-query` (error at `import { QueryClient, QueryClientProvider } from \"@tanstack/react-query\";`), indicating package.json dependencies are incomplete/out of sync with code.",
+    "Local app shows a blank page because `frontend/src/main.tsx` calls `ReactDOM.createRoot(...).render()` with no React element tree; nothing is mounted to `#root` (should at least render `<App />`, optionally wrapped in `QueryClientProvider`)."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-static-marketing-website-for-a-freight-management-company-with-four-pages-home-about-us-services-and-contact-us",
@@ -70,6 +84,86 @@
         "REQ-8"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-generate-a-new-background-image-featuring-a-cargo-ship-with-stacked-containers-that-matches-the-current-freight-logistics-visual-vibe-and-add-it-to-the-app-s-static-assets",
+      "title": "Generate a new background image featuring a cargo ship with stacked containers that matches the current freight/logistics visual vibe, and add it to the app’s static assets.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-the-new-ship-with-containers-background-image-behind-the-primary-hero-area-and-any-other-relevant-top-of-page-sections-as-appropriate-using-a-readable-overlay-so-headings-buttons-and-navigation-remain-accessible-and-high-contrast-in-both-light-and-dark-themes",
+      "title": "Apply the new ship-with-containers background image behind the primary hero area (and any other relevant top-of-page sections as appropriate) using a readable overlay so headings, buttons, and navigation remain accessible and high-contrast in both light and dark themes.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-shipment-tracking-system-that-allows-a-user-to-enter-a-tracking-number-and-view-shipment-details-and-status-events",
+      "title": "Implement a shipment tracking system that allows a user to enter a tracking number and view shipment details and status events.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-additional-hero-side-image-shown-in-the-home-page-hero-section-so-only-the-background-image-remains-keep-the-existing-ship-container-background-and-overlay-specifically-remove-the-right-side-large-image-that-uses-assets-generated-freight-hero-dim-1920x800-png-from-the-hero-layout",
+      "title": "Remove the additional hero-side image shown in the Home page hero section so only the background image remains (keep the existing ship-container background and overlay). Specifically, remove the right-side large image that uses \"/assets/generated/freight-hero.dim_1920x800.png\" from the hero layout.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-readability-of-text-rendered-on-top-of-the-ship-container-hero-background-image-by-increasing-contrast-in-both-light-and-dark-themes-e-g-adjust-overlay-strength-and-or-apply-appropriate-high-contrast-text-utility-classes-so-hero-headings-supporting-paragraph-and-stats-labels-are-not-hidden-by-their-color-against-the-background",
+      "title": "Fix the readability of text rendered on top of the ship-container hero background image by increasing contrast in both light and dark themes (e.g., adjust overlay strength and/or apply appropriate high-contrast text utility classes), so hero headings, supporting paragraph, and stats labels are not hidden by their color against the background.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-shipment-tracking-page-to-a-coming-soon-placeholder-disable-the-submit-track-button-and-display-a-clear-coming-soon-message-indicating-the-feature-is-not-yet-available",
+      "title": "Update the Shipment Tracking page to a 'Coming soon' placeholder: disable the submit/Track button and display a clear \"Coming soon\" message indicating the feature is not yet available.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-hero-section-text-styling-so-the-hero-headline-supporting-paragraph-and-the-three-hero-stats-labels-years-experience-countries-served-shipments-year-render-in-a-white-or-otherwise-light-color-that-remains-readable-on-top-of-the-ship-container-background-image",
+      "title": "Update the Home page hero section text styling so the hero headline, supporting paragraph, and the three hero stats labels (\"Years Experience\", \"Countries Served\", \"Shipments/Year\") render in a white or otherwise light color that remains readable on top of the ship-container background image.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-duplicate-react-query-provider-setup-so-the-app-uses-a-single-queryclientprovider-instance-either-in-frontend-src-main-tsx-or-frontend-src-app-tsx-without-changing-user-facing-functionality",
+      "title": "Remove the duplicate React Query provider setup so the app uses a single `QueryClientProvider` instance (either in `frontend/src/main.tsx` or `frontend/src/App.tsx`), without changing user-facing functionality.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-app-always-mounts-a-react-element-tree-to-the-root-element-render-app-wrapped-with-the-required-providers-so-the-ui-is-not-blank-when-running-locally-even-if-a-user-s-downloaded-copy-of-frontend-src-main-tsx-contains-an-empty-render-call",
+      "title": "Ensure the app always mounts a React element tree to the #root element (render <App /> wrapped with the required providers) so the UI is not blank when running locally, even if a user’s downloaded copy of frontend/src/main.tsx contains an empty render() call.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-do-not-modify-any-files-in-the-immutable-frontend-paths-if-an-entry-point-change-is-required-to-guarantee-mounting-implement-it-via-a-new-entry-module-e-g-a-new-src-file-and-update-frontend-index-html-to-import-that-new-entry-module-instead-of-editing-frontend-src-main-tsx",
+      "title": "Do not modify any files in the immutable frontend paths; if an entry-point change is required to guarantee mounting, implement it via a new entry module (e.g., a new src file) and update frontend/index.html to import that new entry module instead of editing frontend/src/main.tsx.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -77,6 +171,48 @@
       "id": "AR-1",
       "summary": "Create a static freight management website with four pages: Home, About Us, Services, Contact Us, showcasing many freight-related services.",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add a background image (ship with containers) behind relevant sections that matches the site’s visual vibe.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add a shipment tracking system so users can track their shipment.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Update the shipment tracking page to a 'Coming soon' placeholder: disable the submit button and display messaging that the feature is coming soon.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Replace the incomplete `frontend/package.json` with a complete, valid package manifest for this React + TypeScript + Tailwind + TanStack Router + React Query frontend so that `pnpm install` installs all required dependencies (including Vite) and `pnpm run dev` starts the app successfully on Windows.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Restore or create a valid `frontend/package.json` (and any required lockfile updates) so that `pnpm install` installs all dependencies used by the current frontend source code, including `@tanstack/react-query` required by `frontend/src/main.tsx` and `frontend/src/App.tsx`.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Ensure the `frontend` dependency list is consistent with the actual imports in the codebase (at minimum: React, React DOM, Vite + React plugin, TypeScript, Tailwind/PostCSS tooling, `@tanstack/react-router`, `@tanstack/react-query`, `next-themes`, and the Internet Identity dependencies imported by `frontend/src/hooks/useInternetIdentity.ts` such as `@dfinity/auth-client` and `@icp-sdk/core`).",
+      "reqIds": [
+        "REQ-18"
+      ],
       "status": "pending"
     }
   ],

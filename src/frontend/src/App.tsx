@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import ContactPage from './pages/ContactPage';
+import TrackingPage from './pages/TrackingPage';
 
 // Root route with layout
 const rootRoute = createRootRoute({
@@ -40,12 +41,19 @@ const contactRoute = createRoute({
   component: ContactPage,
 });
 
+const trackingRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/tracking',
+  component: TrackingPage,
+});
+
 // Create route tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   servicesRoute,
   contactRoute,
+  trackingRoute,
 ]);
 
 // Create router
@@ -60,4 +68,3 @@ function App() {
 }
 
 export default App;
-

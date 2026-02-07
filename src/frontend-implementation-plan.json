@@ -1,238 +1,37 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Static Freight Management Marketing Site (4 pages)",
+  "title": "Fix blank page by switching to a resilient React entry module",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Implement a static 4-page marketing site with client-side routing (Home, About Us, Services, Contact Us) and no backend dependencies.",
+      "id": "REQ-20",
+      "summary": "Add a resilient React entry module that always mounts <App /> to #root with exactly one QueryClientProvider and InternetIdentityProvider.",
       "acceptanceCriteria": [
-        "The site has 4 distinct routes/pages: Home, About Us, Services, Contact Us.",
-        "All pages render without backend dependencies and work as a static brochure site.",
-        "Navigation between pages works via a consistent header navigation on desktop and mobile."
+        "Running `pnpm run dev` renders the site content (header/nav and Home page) instead of a blank screen.",
+        "The React entry point renders `<App />` and includes `QueryClientProvider` and `InternetIdentityProvider` wrappers exactly once (no duplicate React Query provider in the mounted tree).",
+        "No user-facing text is changed as part of this fix (only mounting/bootstrapping behavior)."
       ],
       "file_operations": [
         {
-          "path": "frontend/package.json",
-          "operation": "modify",
-          "description": "Ensure the frontend has a routing dependency (e.g., react-router-dom) and required build dependencies to support 4 distinct client-side routes."
-        },
-        {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/entry.tsx",
           "operation": "create",
-          "description": "Create the app shell with client-side routing for Home, About Us, Services, and Contact Us routes (static content only; no backend calls)."
-        },
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "create",
-          "description": "Create the Home page route component with static brochure content."
-        },
-        {
-          "path": "frontend/src/pages/AboutPage.tsx",
-          "operation": "create",
-          "description": "Create the About Us page route component with static brochure content."
-        },
-        {
-          "path": "frontend/src/pages/ServicesPage.tsx",
-          "operation": "create",
-          "description": "Create the Services page route component with static brochure content."
-        },
-        {
-          "path": "frontend/src/pages/ContactPage.tsx",
-          "operation": "create",
-          "description": "Create the Contact Us page route component with static brochure content and a client-only form experience."
+          "description": "Create a new React entry module that imports global styles, creates a single React Query QueryClient instance, and mounts a React element tree to the '#root' element by rendering <App /> wrapped exactly once with QueryClientProvider and InternetIdentityProvider. Use the selected 'core-infrastructure' component patterns for the React app entry point where applicable; verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-2",
-      "summary": "Add a shared responsive layout (header/nav, main, footer) across all pages.",
+      "id": "REQ-21",
+      "summary": "Avoid editing immutable entry-point and hook files by switching index.html to load the new entry module instead of src/main.tsx.",
       "acceptanceCriteria": [
-        "Header includes the company name/logo area and links to Home, About Us, Services, Contact Us.",
-        "Footer appears on every page and includes at minimum: company name, a short tagline, and basic contact placeholders (phone/email/location).",
-        "Layout is responsive and readable on mobile, tablet, and desktop widths."
+        "No changes are made to any immutable paths listed by the platform (including frontend/src/main.tsx and Internet Identity hook files).",
+        "frontend/index.html loads the new entry module and the app renders correctly.",
+        "The build (`pnpm run build`) and preview (`pnpm run preview`) still work and show the same pages/routes."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/SiteLayout.tsx",
-          "operation": "create",
-          "description": "Create a shared layout component (header with navigation + footer) used by all routes. Use shadcn-ui components (e.g., Button) for consistent navigation actions; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/HeaderNav.tsx",
-          "operation": "create",
-          "description": "Create a responsive header navigation (desktop links + mobile menu) including company name/logo area. Use shadcn-ui components (e.g., Sheet/DropdownMenu/Button) for the mobile navigation pattern; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/SiteFooter.tsx",
-          "operation": "create",
-          "description": "Create a footer displayed on every page with company name, tagline, and contact placeholders (phone/email/location)."
-        },
-        {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Wire SiteLayout into the router so all four pages share the same header/footer and responsive container behavior."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Build the Home page with hero, credibility highlights, and CTAs linking to Services and Contact Us.",
-      "acceptanceCriteria": [
-        "Home page includes a hero with a headline, subheadline, and primary CTA button linking to Contact Us.",
-        "Home page includes 3–6 credibility highlight items (e.g., on-time delivery, global coverage, tracking, customs expertise) presented as cards or a grid.",
-        "Home page includes a brief services preview section linking to the Services page."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Implement hero section (with image + headline/subheadline + primary CTA to Contact), credibility highlights grid (3–6 items), and a services preview section linking to Services. Use shadcn-ui components (e.g., Card, Button) for highlights and CTAs; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/ServicePreviewGrid.tsx",
-          "operation": "create",
-          "description": "Create a reusable services preview grid used on Home to link into the Services page. Use shadcn-ui Card styling for preview items; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Build the About Us page with overview sections and a simple timeline or stats strip.",
-      "acceptanceCriteria": [
-        "About Us page includes at least: Company Overview, Mission & Values, and Why Choose Us sections.",
-        "About Us page includes either a timeline component (3–5 milestones) or a stats strip (e.g., years in business, shipments handled, countries served)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/AboutPage.tsx",
-          "operation": "modify",
-          "description": "Implement Company Overview, Mission & Values, and Why Choose Us sections plus a stats strip or timeline (3–5 items). Use shadcn-ui Card/Separator components for clean section structure; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/StatsStrip.tsx",
-          "operation": "create",
-          "description": "Create a simple stats strip component (e.g., years in business, shipments handled, countries served) to display on About. Use shadcn-ui Card or similar surface styles; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Build the Services page showcasing many freight-related services organized into categories with cards and a Contact CTA.",
-      "acceptanceCriteria": [
-        "Services page includes multiple categories (e.g., Air Freight, Ocean Freight, Road/Trucking, Rail, Customs Brokerage, Warehousing, Last-mile, Project Cargo, Freight Insurance, Supply Chain Consulting).",
-        "Each service is displayed as a card/list item with a title and 1–3 sentence description.",
-        "Services page provides a CTA area linking to Contact Us for quotes/consultations."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/ServicesPage.tsx",
-          "operation": "modify",
-          "description": "Implement categorized service sections and render each service as a card/list item with title + short description, plus a CTA area linking to Contact. Use shadcn-ui Card and Button for service items and CTA; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/ServiceCategorySection.tsx",
-          "operation": "create",
-          "description": "Create a reusable category section component to render a category title and a responsive grid of service cards. Use shadcn-ui Card for consistent service presentation; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Create a static Contact page with a client-side validated form and non-sending submission success state plus visible contact details.",
-      "acceptanceCriteria": [
-        "Contact form includes: Name, Email, Phone (optional), Service Interested In (select), Message.",
-        "Client-side validation: required fields and valid email format; show inline error messages.",
-        "On submit, the app shows a success state (no external email/service integration).",
-        "Page includes visible contact details (email, phone, office address placeholders) and business hours placeholders."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/ContactPage.tsx",
-          "operation": "modify",
-          "description": "Implement a static contact form with client-side validation and a success message on submit (no sending/storing). Show visible contact details and business hours placeholders. Use shadcn-ui form inputs (Input, Textarea, Select) and Alert for success/error presentation; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/lib/contactValidation.ts",
-          "operation": "create",
-          "description": "Add lightweight client-side validation helpers (required fields + email format) for the Contact form; keep logic frontend-only and static."
-        },
-        {
-          "path": "frontend/src/components/ContactDetailsCard.tsx",
-          "operation": "create",
-          "description": "Create a contact details card (email/phone/address/hours placeholders) to display alongside the form. Use shadcn-ui Card for consistent styling; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "summary": "Apply a coherent logistics-appropriate theme (non-default blue/purple) with consistent typography, spacing, and component styling.",
-      "acceptanceCriteria": [
-        "A consistent design system is evident across pages (same button styles, card styles, headings, spacing scale).",
-        "Color palette is not the default blue/purple; use a distinct logistics-appropriate theme (e.g., charcoal + safety orange accents or deep green + sand accents).",
-        "All pages look visually consistent and polished with Tailwind styling."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "create",
-          "description": "Create global styles and CSS variables used by Tailwind/shadcn theme tokens; set a logistics palette (e.g., charcoal base with safety-orange accents) and consistent typography/spacing defaults."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Adjust Tailwind theme extensions (if needed) to support the chosen logistics palette and consistent container/typography utilities without introducing a default blue/purple look."
-        },
-        {
-          "path": "frontend/src/components/SiteLayout.tsx",
-          "operation": "modify",
-          "description": "Apply consistent layout spacing, max-width container rules, and shared typographic styles across pages using Tailwind utility classes and shadcn-ui surfaces; verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "summary": "Add generated static images (hero, logos, service icons) under public assets and render them in the UI.",
-      "acceptanceCriteria": [
-        "Generated images are stored under frontend/public/assets/generated and referenced directly by the frontend.",
-        "Hero image and logo appear on the site without being served through the backend.",
-        "Images are optimized for web display (appropriate dimensions and file types)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/freight-hero.dim_1920x800.png",
-          "operation": "create",
-          "description": "Add the generated hero banner image asset at the required path for direct static serving."
-        },
-        {
-          "path": "frontend/public/assets/generated/freight-logo-light.dim_512x512.png",
-          "operation": "create",
-          "description": "Add the generated light logo image asset at the required path for direct static serving."
-        },
-        {
-          "path": "frontend/public/assets/generated/freight-logo-dark.dim_512x512.png",
-          "operation": "create",
-          "description": "Add the generated dark logo image asset at the required path for direct static serving."
-        },
-        {
-          "path": "frontend/public/assets/generated/freight-service-icons.dim_1024x1024.png",
-          "operation": "create",
-          "description": "Add the generated service icon sheet asset at the required path for direct static serving."
-        },
-        {
-          "path": "frontend/src/components/HeaderNav.tsx",
-          "operation": "modify",
-          "description": "Render the appropriate logo variant in the header (light/dark as needed) by referencing frontend/public/assets/generated/freight-logo-light.dim_512x512.png and/or frontend/public/assets/generated/freight-logo-dark.dim_512x512.png."
-        },
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Render the hero banner image by referencing frontend/public/assets/generated/freight-hero.dim_1920x800.png, ensuring it displays well responsively without backend involvement."
-        },
-        {
-          "path": "frontend/src/pages/ServicesPage.tsx",
-          "operation": "modify",
-          "description": "Reference frontend/public/assets/generated/freight-service-icons.dim_1024x1024.png to visually support service categories (e.g., via cropped usage or mapped icons), keeping all assets static and frontend-served."
+          "description": "Update the Vite module script import to load the new entry module (e.g., /src/entry.tsx) instead of /src/main.tsx, ensuring local dev, build, and preview mount the app even if frontend/src/main.tsx is empty."
         }
       ]
     }

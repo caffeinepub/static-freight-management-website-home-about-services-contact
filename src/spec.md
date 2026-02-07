@@ -1,16 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Build a static, four-page freight management marketing website with a consistent layout, cohesive logistics-themed styling, and generated brand visuals.
+**Goal:** Fix the blank page by guaranteeing the React app mounts a valid element tree to `#root` via a stable entry module, without editing immutable frontend files.
 
 **Planned changes:**
-- Create 4 routes/pages: Home, About Us, Services, Contact Us, with consistent header navigation and a shared footer.
-- Implement a responsive shared layout (header/main/footer) with company name/logo area, nav links, and footer contact placeholders.
-- Home page: hero section with headline/subheadline and CTA to Contact Us; credibility highlights grid; services preview linking to Services.
-- About Us page: Company Overview, Mission & Values, Why Choose Us sections; add a simple timeline or stats strip.
-- Services page: multiple freight service categories displayed as cards with brief descriptions; include CTA linking to Contact Us.
-- Contact Us page: static contact form with client-side validation and success state; show contact details and business hours placeholders.
-- Apply a cohesive non-blue/purple logistics visual theme (palette, typography, spacing, buttons/cards) across all pages.
-- Add generated static images (logo, hero, service icons) under `frontend/public/assets/generated` and reference them directly in the frontend.
+- Add a new frontend entry module that renders `<App />` and wraps it with `QueryClientProvider` and `InternetIdentityProvider` exactly once.
+- Update `frontend/index.html` to import the new entry module instead of `frontend/src/main.tsx`.
+- Ensure dev, build, and preview all render the existing header/nav and Home page with no user-facing text changes.
 
-**User-visible outcome:** Visitors can browse a polished, responsive freight management brochure site, review service offerings and company info, and fill out a validated contact form that shows a success message (without sending).
+**User-visible outcome:** Running `pnpm run dev`, `pnpm run build`, or `pnpm run preview` shows the normal site UI (not a blank screen), even if `frontend/src/main.tsx` is empty.

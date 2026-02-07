@@ -1,11 +1,11 @@
 {
   "frontend/src/index.css": "Global styles with OKLCH color system using charcoal base and safety orange accents for a professional logistics theme, supporting both light and dark modes.",
   "frontend/tailwind.config.js": "Tailwind configuration with extended theme for logistics branding, custom container padding, Inter font family, and custom animations.",
-  "frontend/src/App.tsx": "Main application component with TanStack Router setup for four routes (Home, About, Services, Contact) wrapped in ThemeProvider and SiteLayout.",
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup for five routes (Home, About, Services, Contact, Tracking) wrapped in ThemeProvider and SiteLayout, with no duplicate QueryClientProvider.",
   "frontend/src/components/SiteLayout.tsx": "Layout wrapper component that provides consistent header navigation and footer across all pages.",
-  "frontend/src/components/HeaderNav.tsx": "Responsive header navigation with logo, desktop menu, mobile sheet menu, and Get Quote CTA button.",
-  "frontend/src/components/SiteFooter.tsx": "Site footer with company info, quick links, services list, contact details, social media icons, and caffeine.ai attribution.",
-  "frontend/src/pages/HomePage.tsx": "Home page with hero section, stats, credibility highlights grid, services preview, and CTA sections showcasing GlobalFreight's value proposition.",
+  "frontend/src/components/HeaderNav.tsx": "Responsive header navigation with logo, desktop menu including Track Shipment link, mobile sheet menu, and Get Quote CTA button.",
+  "frontend/src/components/SiteFooter.tsx": "Site footer with company info, quick links including Track Shipment, services list, contact details, social media icons, and caffeine.ai attribution.",
+  "frontend/src/pages/HomePage.tsx": "Home page with centered hero section featuring ship-container background image with darker overlay for better text contrast, white hero text (headline, paragraph, and stat labels), credibility highlights grid, services preview, and CTA sections showcasing GlobalFreight's value proposition.",
   "frontend/src/components/ServicePreviewGrid.tsx": "Reusable grid component displaying four main service categories (Air, Ocean, Road, Warehousing) as preview cards.",
   "frontend/src/pages/AboutPage.tsx": "About page with company story, stats strip, mission & values cards, and why choose us section.",
   "frontend/src/components/StatsStrip.tsx": "Statistics banner component displaying key metrics (shipments, countries, clients, on-time delivery) with icons.",
@@ -14,5 +14,12 @@
   "frontend/src/pages/ContactPage.tsx": "Contact page with validated form (name, email, phone, service, message), success state, and contact details sidebar.",
   "frontend/src/components/ContactDetailsCard.tsx": "Contact information cards displaying email, phone, office address, and business hours with icons.",
   "frontend/src/lib/contactValidation.ts": "Client-side form validation utility for contact form with required field and email format checks.",
-  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as the static site requires no backend queries."
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as the static site requires no backend queries.",
+  "frontend/src/pages/TrackingPage.tsx": "Tracking page displaying a \"Coming Soon\" alert message with disabled form input and submit button, indicating the tracking feature is under development.",
+  "frontend/src/hooks/useShipmentTracking.ts": "React Query hook that fetches shipment details from the backend actor using the tracking number.",
+  "frontend/src/lib/formatters.ts": "Utility functions for formatting timestamps from bigint nanoseconds to human-readable date/time strings.",
+  "frontend/package.json": "Complete package manifest for a Vite + React + TypeScript + Tailwind frontend with all required dependencies including Vite, React 19, TanStack Router/Query, next-themes, ICP/Dfinity SDK, shadcn/ui Radix primitives, and Tailwind plugins, enabling pnpm install and pnpm run dev to work correctly on Windows.",
+  "frontend/src/main.tsx": "Application entry point that wraps the app with QueryClientProvider (configured with 5-minute stale time and disabled window focus refetch) and InternetIdentityProvider, rendering the root App component.",
+  "frontend/src/entry.tsx": "New React application entry point that creates a QueryClient, imports global styles, and mounts the App component wrapped with QueryClientProvider and InternetIdentityProvider to the #root element.",
+  "frontend/index.html": "HTML entry point that loads the new entry module (/src/entry.tsx) instead of main.tsx to ensure the app renders correctly even if main.tsx is incomplete."
 }

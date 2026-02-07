@@ -9,6 +9,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
   { href: '/services', label: 'Services' },
+  { href: '/tracking', label: 'Track Shipment' },
   { href: '/contact', label: 'Contact Us' },
 ];
 
@@ -87,4 +88,3 @@ export default function HeaderNav() {
     </header>
   );
 }
-

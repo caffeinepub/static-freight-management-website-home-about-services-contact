@@ -2,14 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-static-marketing-website-for-a-freight-management-company-with-four-pages-home-about-us-services-and-contact-us",
-      "featureTitle": "Create a static marketing website for a freight management company with four pages: Home, About Us, Services, and Contact Us.",
+      "featureId": "feature-ensure-the-app-always-mounts-a-react-element-tree-to-the-root-element-render-app-wrapped-with-the-required-providers-so-the-ui-is-not-blank-when-running-locally-even-if-a-user-s-downloaded-copy-of-frontend-src-main-tsx-contains-an-empty-render-call",
+      "featureTitle": "Ensure the app always mounts a React element tree to the #root element (render <App /> wrapped with the required providers) so the UI is not blank when running locally, even if a user’s downloaded copy of frontend/src/main.tsx contains an empty render() call.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/pages/AboutPage.tsx",
-        "frontend/src/pages/ContactPage.tsx",
-        "frontend/src/pages/HomePage.tsx",
-        "frontend/src/pages/ServicesPage.tsx"
+        "frontend/src/entry.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -19,18 +15,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-1"
+        "REQ-20"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-a-consistent-site-layout-header-with-navigation-main-content-area-footer-shared-across-all-pages",
-      "featureTitle": "Implement a consistent site layout (header with navigation, main content area, footer) shared across all pages.",
+      "featureId": "feature-do-not-modify-any-files-in-the-immutable-frontend-paths-if-an-entry-point-change-is-required-to-guarantee-mounting-implement-it-via-a-new-entry-module-e-g-a-new-src-file-and-update-frontend-index-html-to-import-that-new-entry-module-instead-of-editing-frontend-src-main-tsx",
+      "featureTitle": "Do not modify any files in the immutable frontend paths; if an entry-point change is required to guarantee mounting, implement it via a new entry module (e.g., a new src file) and update frontend/index.html to import that new entry module instead of editing frontend/src/main.tsx.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/HeaderNav.tsx",
-        "frontend/src/components/SiteFooter.tsx",
-        "frontend/src/components/SiteLayout.tsx"
+        "frontend/index.html"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -40,124 +33,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-home-page-include-a-hero-section-trust-credibility-highlights-and-call-to-action-sections-that-direct-users-to-services-and-contact-us",
-      "featureTitle": "Home page: include a hero section, trust/credibility highlights, and call-to-action sections that direct users to Services and Contact Us.",
-      "files": [
-        "frontend/src/components/ServicePreviewGrid.tsx",
-        "frontend/src/pages/HomePage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-about-us-page-provide-company-overview-content-sections-mission-values-what-makes-the-company-different-and-a-simple-timeline-or-stats-strip",
-      "featureTitle": "About Us page: provide company overview content sections (mission, values, what makes the company different) and a simple timeline or stats strip.",
-      "files": [
-        "frontend/src/components/StatsStrip.tsx",
-        "frontend/src/pages/AboutPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-4"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-services-page-showcase-many-freight-related-services-as-clearly-structured-categories-with-service-cards-and-brief-descriptions",
-      "featureTitle": "Services page: showcase many freight-related services as clearly structured categories with service cards and brief descriptions.",
-      "files": [
-        "frontend/src/components/ServiceCategorySection.tsx",
-        "frontend/src/pages/ServicesPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-5"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-contact-us-page-include-a-static-contact-form-with-client-side-validation-and-a-non-sending-submission-experience-e-g-success-message-plus-visible-company-contact-details",
-      "featureTitle": "Contact Us page: include a static contact form with client-side validation and a non-sending submission experience (e.g., success message) plus visible company contact details.",
-      "files": [
-        "frontend/src/components/ContactDetailsCard.tsx",
-        "frontend/src/lib/contactValidation.ts",
-        "frontend/src/pages/ContactPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-6"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-apply-a-coherent-visual-theme-across-the-site-color-palette-typography-spacing-and-component-styling-suitable-for-a-freight-logistics-brand-avoid-a-blue-purple-default-look",
-      "featureTitle": "Apply a coherent visual theme across the site (color palette, typography, spacing, and component styling) suitable for a freight/logistics brand; avoid a blue/purple default look.",
-      "files": [
-        "frontend/src/components/SiteLayout.tsx",
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-7"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-static-image-assets-generated-for-branding-and-page-visuals-and-render-them-from-the-frontend-public-assets-folder",
-      "featureTitle": "Add static image assets (generated) for branding and page visuals, and render them from the frontend public assets folder.",
-      "files": [
-        "frontend/src/components/HeaderNav.tsx",
-        "frontend/src/pages/HomePage.tsx",
-        "frontend/src/pages/ServicesPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-8"
+        "REQ-21"
       ],
       "confidence": "high"
     }

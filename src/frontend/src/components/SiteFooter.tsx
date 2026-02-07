@@ -54,6 +54,11 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link to="/tracking" className="text-muted-foreground transition-colors hover:text-primary">
+                  Track Shipment
+                </Link>
+              </li>
+              <li>
                 <Link to="/contact" className="text-muted-foreground transition-colors hover:text-primary">
                   Contact Us
                 </Link>
@@ -110,4 +115,3 @@ export default function SiteFooter() {
     </footer>
   );
 }
-

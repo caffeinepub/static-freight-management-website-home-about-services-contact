@@ -50,20 +50,31 @@ const highlights = [
 export default function HomePage() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-muted/30">
+      {/* Hero Section with Background */}
+      <section className="relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/assets/generated/ship-container-bg.dim_1920x1080.png"
+            alt=""
+            className="h-full w-full object-cover"
+          />
+          {/* Darker overlay for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/65 to-black/60" />
+        </div>
+
         <div className="container relative z-10 py-20 md:py-28 lg:py-36">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="flex flex-col justify-center space-y-6">
+          <div className="mx-auto max-w-4xl">
+            <div className="flex flex-col justify-center space-y-6 text-center">
               <div className="space-y-4">
-                <h1 className="animate-fade-in">
+                <h1 className="animate-fade-in text-white">
                   Global Freight Solutions for Your Business
                 </h1>
-                <p className="text-lg text-muted-foreground md:text-xl">
+                <p className="mx-auto max-w-2xl text-lg text-white/90 md:text-xl">
                   Reliable, efficient, and cost-effective logistics services connecting your business to the world. From air to ocean, we handle it all.
                 </p>
               </div>
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <Link to="/contact">
                   <Button size="lg" className="w-full sm:w-auto">
                     Get a Quote
@@ -71,33 +82,24 @@ export default function HomePage() {
                   </Button>
                 </Link>
                 <Link to="/services">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white">
                     View Services
                   </Button>
                 </Link>
               </div>
-              <div className="flex flex-wrap gap-8 pt-4">
+              <div className="flex flex-wrap justify-center gap-8 pt-4">
                 <div>
                   <div className="text-3xl font-bold text-primary">25+</div>
-                  <div className="text-sm text-muted-foreground">Years Experience</div>
+                  <div className="text-sm font-medium text-white/80">Years Experience</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-primary">150+</div>
-                  <div className="text-sm text-muted-foreground">Countries Served</div>
+                  <div className="text-sm font-medium text-white/80">Countries Served</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-primary">50K+</div>
-                  <div className="text-sm text-muted-foreground">Shipments/Year</div>
+                  <div className="text-sm font-medium text-white/80">Shipments/Year</div>
                 </div>
-              </div>
-            </div>
-            <div className="relative hidden lg:block">
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-medium">
-                <img
-                  src="/assets/generated/freight-hero.dim_1920x800.png"
-                  alt="Global freight and logistics"
-                  className="h-full w-full object-cover"
-                />
               </div>
             </div>
           </div>
@@ -170,4 +172,3 @@ export default function HomePage() {
     </div>
   );
 }
-

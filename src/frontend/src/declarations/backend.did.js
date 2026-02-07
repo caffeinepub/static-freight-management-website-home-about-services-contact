@@ -8,10 +8,84 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const idlService = IDL.Service({});
+export const ShipmentEventSnapshot = IDL.Record({
+  'status' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'location' : IDL.Text,
+});
+export const ShipmentDetailsSnapshot = IDL.Record({
+  'trackingNumber' : IDL.Text,
+  'destination' : IDL.Text,
+  'origin' : IDL.Text,
+  'recipient' : IDL.Text,
+  'sender' : IDL.Text,
+  'events' : IDL.Vec(ShipmentEventSnapshot),
+  'currentStatus' : IDL.Text,
+});
+
+export const idlService = IDL.Service({
+  'addShipment' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [IDL.Bool],
+      [],
+    ),
+  'addShipmentEvent' : IDL.Func(
+      [IDL.Text, IDL.Int, IDL.Text, IDL.Text],
+      [IDL.Bool],
+      [],
+    ),
+  'getAllShipments' : IDL.Func(
+      [],
+      [IDL.Vec(IDL.Tuple(IDL.Text, ShipmentDetailsSnapshot))],
+      ['query'],
+    ),
+  'getShipmentDetails' : IDL.Func(
+      [IDL.Text],
+      [IDL.Opt(ShipmentDetailsSnapshot)],
+      ['query'],
+    ),
+});
 
 export const idlInitArgs = [];
 
-export const idlFactory = ({ IDL }) => { return IDL.Service({}); };
+export const idlFactory = ({ IDL }) => {
+  const ShipmentEventSnapshot = IDL.Record({
+    'status' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'location' : IDL.Text,
+  });
+  const ShipmentDetailsSnapshot = IDL.Record({
+    'trackingNumber' : IDL.Text,
+    'destination' : IDL.Text,
+    'origin' : IDL.Text,
+    'recipient' : IDL.Text,
+    'sender' : IDL.Text,
+    'events' : IDL.Vec(ShipmentEventSnapshot),
+    'currentStatus' : IDL.Text,
+  });
+  
+  return IDL.Service({
+    'addShipment' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Bool],
+        [],
+      ),
+    'addShipmentEvent' : IDL.Func(
+        [IDL.Text, IDL.Int, IDL.Text, IDL.Text],
+        [IDL.Bool],
+        [],
+      ),
+    'getAllShipments' : IDL.Func(
+        [],
+        [IDL.Vec(IDL.Tuple(IDL.Text, ShipmentDetailsSnapshot))],
+        ['query'],
+      ),
+    'getShipmentDetails' : IDL.Func(
+        [IDL.Text],
+        [IDL.Opt(ShipmentDetailsSnapshot)],
+        ['query'],
+      ),
+  });
+};
 
 export const init = ({ IDL }) => { return []; };

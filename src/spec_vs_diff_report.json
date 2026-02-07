@@ -1,74 +1,69 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-07T01:22:32.796Z",
-  "summary": "Most requested brochure-site features appear implemented (4 routes, shared layout, themed styling, services structure, and static contact form with client-side validation). However, the diff introduces Internet Identity/auth-related plumbing, actor/query infrastructure, and a backend Motoko canister stub—items explicitly called out as non-goals/constraints for a static marketing site.",
-  "missing_requirements": [],
+  "generatedAt": "2026-02-07T03:03:43.566Z",
+  "summary": "A new entry module (frontend/src/entry.tsx) was added and frontend/index.html was updated to load it, which aligns with the goal of mounting the app even if src/main.tsx is broken. However, the diff summary indicates multiple unrelated frontend changes (including to immutable paths and user-facing content), and it also appears to add new routes/pages/features beyond the blank-page mounting fix.",
+  "missing_requirements": [
+    {
+      "id": "REQ-21",
+      "requirement": "Do not modify any files in the immutable frontend paths; if an entry-point change is required, implement it via a new entry module and update frontend/index.html instead of editing frontend/src/main.tsx.",
+      "reason": "The diff summary explicitly lists modifications to immutable paths (e.g., frontend/src/main.tsx, frontend/src/index.css, and frontend/src/components/ui/* is implicated by theme/component changes). REQ-21 requires zero edits to immutable paths.",
+      "evidence": [
+        "frontend-file-summaries.txt (shows modifications to \"frontend/src/main.tsx\" and \"frontend/src/index.css\")"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "requirement": "No user-facing text is changed as part of this fix (only mounting/bootstrapping behavior).",
+      "reason": "frontend/index.html’s <title> is user-facing text and appears to be (re)specified/changed as part of the diff. Also, the diff summary suggests new/changed page content (e.g., Tracking page 'Coming Soon'), which goes beyond mounting/bootstrapping behavior.",
+      "evidence": [
+        "frontend/index.html",
+        "frontend-file-summaries.txt (describes many page/content files like HomePage, TrackingPage, etc.)"
+      ]
+    }
+  ],
   "hallucinated_features": [
     {
-      "description": "Internet Identity authentication integration (provider/hook usage and AuthClient-based logic) despite being a non-goal and constraint.",
-      "reason": "BuildRequest explicitly lists user accounts/login/Internet Identity integration as non-goals; the diff adds and wires an InternetIdentityProvider and related hook implementation.",
+      "description": "Substantial site redesign/content and multi-route app changes (TanStack Router with five routes/pages: Home, About, Services, Contact, Tracking) beyond fixing the blank render/mounting behavior.",
+      "reason": "BuildRequest explicitly states non-goals: no new pages or new business features, and no design/theme/content changes beyond what is necessary to fix blank render.",
       "evidence": [
-        "frontend/src/main.tsx",
-        "frontend/src/hooks/useInternetIdentity.ts"
+        "frontend-file-summaries.txt (\"frontend/src/App.tsx\": TanStack Router setup for five routes; multiple page components listed)"
       ]
     },
     {
-      "description": "Backend actor integration and react-query-based actor fetching for authenticated/anonymous identities.",
-      "reason": "BuildRequest requires a static brochure site with no backend dependencies and no Motoko canister logic; the diff adds useActor that creates an actor and depends on identity.",
+      "description": "Added shipment tracking feature elements (tracking page and React Query hook fetching shipment details).",
+      "reason": "Not requested; explicitly disallowed as 'new business features' and 'non-goals'.",
       "evidence": [
-        "frontend/src/hooks/useActor.ts"
+        "frontend-file-summaries.txt (\"frontend/src/pages/TrackingPage.tsx\", \"frontend/src/hooks/useShipmentTracking.ts\")"
       ]
     },
     {
-      "description": "Introduced a backend Motoko canister stub (backend/main.mo).",
-      "reason": "Constraint says to keep the site static without requiring Motoko canister logic / do not introduce additional backend services; adding a backend canister file is unrequested and risks implying backend dependence.",
+      "description": "Large-scale styling/theme updates (new global styles, Tailwind config branding changes).",
+      "reason": "Not requested; non-goal says avoid changing design/theme/content beyond what’s necessary to fix blank render.",
       "evidence": [
-        "backend/main.mo"
+        "frontend-file-summaries.txt (\"frontend/src/index.css\", \"frontend/tailwind.config.js\")"
       ]
     },
     {
-      "description": "Dark/light theme toggling infrastructure via next-themes ThemeProvider and theme-dependent logo selection logic.",
-      "reason": "Not requested in requirements; also introduces theme logic in header (even if logoSrc currently isn’t rendered).",
+      "description": "Added/changed contact form validation utilities and related UI components.",
+      "reason": "Not requested by REQ-20/REQ-21; constitutes new/expanded functionality beyond mounting fix.",
       "evidence": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/HeaderNav.tsx"
+        "frontend-file-summaries.txt (\"frontend/src/lib/contactValidation.ts\", \"frontend/src/pages/ContactPage.tsx\")"
       ]
     },
     {
-      "description": "Added social media icon links in the footer using react-icons.",
-      "reason": "Footer requirements only mention company name, tagline, and basic contact placeholders; social icon links and react-icons usage were not requested.",
+      "description": "Updated/introduced package manifest and broad dependency/tooling changes.",
+      "reason": "Not requested by the BuildRequest; may be unrelated to entry-point mounting fix.",
       "evidence": [
-        "frontend/src/components/SiteFooter.tsx"
+        "frontend-file-summaries.txt (\"frontend/package.json\")"
       ]
     }
   ],
   "confidence": 0.74,
   "changed_files": [
-    "all_files_summary.json",
-    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/index.css",
     "frontend/index.html",
-    "frontend/src/App.tsx",
-    "frontend/src/components/ContactDetailsCard.tsx",
-    "frontend/src/components/HeaderNav.tsx",
-    "frontend/src/components/ServiceCategorySection.tsx",
-    "frontend/src/components/ServicePreviewGrid.tsx",
-    "frontend/src/components/SiteFooter.tsx",
-    "frontend/src/components/SiteLayout.tsx",
-    "frontend/src/components/StatsStrip.tsx",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useInternetIdentity.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/index.css",
-    "frontend/src/lib/contactValidation.ts",
-    "frontend/src/main.tsx",
-    "frontend/src/pages/AboutPage.tsx",
-    "frontend/src/pages/ContactPage.tsx",
-    "frontend/src/pages/HomePage.tsx",
-    "frontend/src/pages/ServicesPage.tsx",
-    "frontend/tailwind.config.js",
+    "frontend/src/entry.tsx",
     "project_state.json"
   ]
 }

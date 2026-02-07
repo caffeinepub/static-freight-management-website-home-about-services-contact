@@ -10,7 +10,29 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface _SERVICE {}
+export interface ShipmentDetailsSnapshot {
+  'trackingNumber' : string,
+  'destination' : string,
+  'origin' : string,
+  'recipient' : string,
+  'sender' : string,
+  'events' : Array<ShipmentEventSnapshot>,
+  'currentStatus' : string,
+}
+export interface ShipmentEventSnapshot {
+  'status' : string,
+  'timestamp' : bigint,
+  'location' : string,
+}
+export interface _SERVICE {
+  'addShipment' : ActorMethod<
+    [string, string, string, string, string, string],
+    boolean
+  >,
+  'addShipmentEvent' : ActorMethod<[string, bigint, string, string], boolean>,
+  'getAllShipments' : ActorMethod<[], Array<[string, ShipmentDetailsSnapshot]>>,
+  'getShipmentDetails' : ActorMethod<[string], [] | [ShipmentDetailsSnapshot]>,
+}
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
 export declare const idlFactory: IDL.InterfaceFactory;
