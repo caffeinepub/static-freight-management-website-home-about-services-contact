@@ -1,85 +1,37 @@
 {
   "kind": "build_request",
-  "title": "Update site branding logo and company contact/address details",
+  "title": "Fix scroll position not resetting to top on navigation",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-33",
-      "text": "Add the user-provided logo image `frgmtlogo.png` to the frontend static assets (under `frontend/public/assets/`) and replace the current header branding (icon + “GlobalFreight”) with this logo image and the company name “Di Logisolutions”. The header logo must link to the Home page and render correctly in both light and dark themes.",
+      "id": "REQ-2",
+      "text": "Ensure that when a user navigates to a different route by clicking any internal link (header nav, footer links, in-page CTAs), the destination page loads scrolled to the top (window scroll position resets to 0,0).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-2026-02-07"
+          "msg-20"
         ],
         "quotes": [
-          "change the logo to attached png file."
+          "when i click on any link it doesnt open the page from the top. so fix this issue."
         ]
       },
       "acceptanceCriteria": [
-        "A new static asset exists at a stable public path (e.g., `/assets/frgmtlogo.png` or similar) that matches the uploaded `frgmtlogo.png`.",
-        "The header shows the new logo image instead of the current Package icon block and no longer displays “GlobalFreight”.",
-        "The company name displayed in the header is “Di Logisolutions”.",
-        "Header branding remains visible/legible in both light and dark theme modes."
-      ]
-    },
-    {
-      "id": "REQ-34",
-      "text": "Update company/contact details everywhere they appear in the UI (footer and contact details components at minimum) to use the exact user-provided information: Office Address: “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”; Phone: “+91-9568740074” and “011-41447376”; Email: “info@dilss.in”; Company name: “Di Logisolution”; Registered address: “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004”.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-user-2026-02-07"
-        ],
-        "quotes": [
-          "office Address: Di LOGISOLUTIONS\nA89, ROAD NO 2, MAHIPALPUR\nNEW DELHI,110037 PHONE NO:- +91-9568740074, 011-41447376\nEmail:- info@dilss.in\nCompany name: Di Logisolution  Registered address: RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004  update these detais"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The footer contact section shows email `info@dilss.in`, phone numbers `+91-9568740074` and `011-41447376`, and the office address in New Delhi exactly as provided.",
-        "The Contact page details card(s) show the updated email, phone number(s), and office address exactly as provided.",
-        "Email links use `mailto:info@dilss.in` and phone links use `tel:+919568740074` and `tel:01141447376` (or equivalent valid tel URIs) while displaying the numbers as provided.",
-        "The registered address is visible somewhere appropriate in the existing contact/company info UI (footer and/or contact details), labeled clearly as “Registered address”."
-      ]
-    },
-    {
-      "id": "REQ-35",
-      "text": "Replace remaining “GlobalFreight” brand mentions in marketing copy headings/titles (e.g., Home/About hero headings and “Why Choose …” section headings) with the updated company branding so the site consistently reflects “Di Logisolutions/Di Logisolution” rather than “GlobalFreight”.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-user-2026-02-07"
-        ],
-        "quotes": [
-          "Company name: Di Logisolution ... update these detais"
-        ]
-      },
-      "acceptanceCriteria": [
-        "No prominent header/footer or page hero titles display the old brand name “GlobalFreight”.",
-        "Key headings that previously referenced the old brand are updated to the new branding while keeping the overall page structure unchanged."
+        "From any page scrolled down, clicking a header navigation link (e.g., Services, About Us, Contact Us) navigates to the new route and places the user at the top of the page.",
+        "From any page scrolled down, clicking a footer quick link navigates to the new route and places the user at the top of the page.",
+        "From the Home page, clicking CTA links (e.g., \"Get a Quote\", \"View Services\") navigates and places the user at the top of the destination page.",
+        "The behavior applies consistently across all current routes: /, /about, /services, /tracking, /contact."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files in the immutable frontend paths listed in SYSTEM_CONTEXT (e.g., `frontend/src/main.tsx`, `frontend/src/hooks/useActor.ts`, and `frontend/src/components/ui`).",
-    "Keep all user-facing text in English.",
-    "Do not introduce new backend canisters/services; changes are frontend-only for branding/contact info."
+    "Do not modify any files under frontend/src/components/ui or any other frontend immutablePaths."
   ],
   "nonGoals": [
-    "Do not implement new functional features (e.g., payments, user accounts, tracking enhancements) as part of this change.",
-    "Do not redesign the entire site theme/layout beyond what is required to display the new logo and updated details."
+    "Do not change the site’s visual design or layout beyond what is required to fix scroll-to-top behavior.",
+    "Do not implement browser back/forward scroll restoration behavior unless it is required to satisfy the user’s request."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 import HeaderNav from './HeaderNav';
 import SiteFooter from './SiteFooter';
+import ScrollToTop from './ScrollToTop';
 
 interface SiteLayoutProps {
   children: ReactNode;
@@ -9,10 +10,10 @@ interface SiteLayoutProps {
 export default function SiteLayout({ children }: SiteLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col">
+      <ScrollToTop />
       <HeaderNav />
       <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>
   );
 }
-

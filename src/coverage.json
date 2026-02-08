@@ -1,53 +1,26 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-07T06:07:22.944Z",
+  "generatedAt": "2026-02-08T08:09:55.803Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-33",
-        "summary": "Add the user-provided logo image `frgmtlogo.png` to the frontend static assets (under `frontend/public/assets/`) and replace the current header branding (icon + “GlobalFreight”) with this logo image and the company name “Di Logisolutions”. The header logo must link to the Home page and render correctly in both light and dark themes.",
+        "id": "REQ-2",
+        "summary": "Ensure that when a user navigates to a different route by clicking any internal link (header nav, footer links, in-page CTAs), the destination page loads scrolled to the top (window scroll position resets to 0,0).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/frgmtlogo.png",
-          "frontend/src/components/HeaderNav.tsx"
+          "frontend/src/components/ScrollToTop.tsx",
+          "frontend/src/components/SiteLayout.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/HeaderNav.tsx"
-        ]
-      },
-      {
-        "id": "REQ-34",
-        "summary": "Update company/contact details everywhere they appear in the UI (footer and contact details components at minimum) to use the exact user-provided information: Office Address: “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”; Phone: “+91-9568740074” and “011-41447376”; Email: “info@dilss.in”; Company name: “Di Logisolution”; Registered address: “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004”.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/SiteFooter.tsx",
-          "frontend/src/components/ContactDetailsCard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/SiteFooter.tsx",
-          "frontend/src/components/ContactDetailsCard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-35",
-        "summary": "Replace remaining “GlobalFreight” brand mentions in marketing copy headings/titles (e.g., Home/About hero headings and “Why Choose …” section headings) with the updated company branding so the site consistently reflects “Di Logisolutions/Di Logisolution” rather than “GlobalFreight”.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/AboutPage.tsx",
-          "frontend/src/components/SiteFooter.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/AboutPage.tsx",
-          "frontend/src/components/SiteFooter.tsx"
+          "frontend/src/components/ScrollToTop.tsx",
+          "frontend/src/components/SiteLayout.tsx"
         ]
       }
     ]
@@ -57,11 +30,8 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/ContactDetailsCard.tsx",
-    "frontend/src/components/HeaderNav.tsx",
-    "frontend/src/components/SiteFooter.tsx",
-    "frontend/src/pages/AboutPage.tsx",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/components/ScrollToTop.tsx",
+    "frontend/src/components/SiteLayout.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

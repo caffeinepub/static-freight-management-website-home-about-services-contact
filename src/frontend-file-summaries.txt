@@ -2,8 +2,8 @@
   "frontend/src/index.css": "Global styles with OKLCH color system using charcoal base and safety orange accents for a professional logistics theme, supporting both light and dark modes.",
   "frontend/tailwind.config.js": "Tailwind configuration with extended theme for logistics branding, custom container padding, Inter font family, and custom animations.",
   "frontend/src/App.tsx": "Main application component with TanStack Router setup for five routes (Home, About, Services, Contact, Tracking) wrapped in ThemeProvider and SiteLayout, with no duplicate QueryClientProvider.",
-  "frontend/src/components/SiteLayout.tsx": "Layout wrapper component that provides consistent header navigation and footer across all pages.",
-  "frontend/src/components/HeaderNav.tsx": "Responsive header navigation with Di Logisolutions logo image from /assets/frgmtlogo.png, desktop menu including Track Shipment link, mobile sheet menu, and Get Quote CTA button.",
+  "frontend/src/components/SiteLayout.tsx": "Layout wrapper component that provides consistent header navigation, footer, and scroll-to-top behavior across all pages.",
+  "frontend/src/components/HeaderNav.tsx": "Responsive header navigation with larger Di Logisolutions logo image (h-12 base, md:h-14 on desktop) from /assets/frgmtlogo.png, desktop menu including Track Shipment link, mobile sheet menu, and Get Quote CTA button.",
   "frontend/src/components/SiteFooter.tsx": "Site footer with Di Logisolution branding, quick links including Track Shipment, services list, updated contact details (info@dilss.in, +91-9568740074, 011-41447376, office address in Mahipalpur New Delhi, and registered address in West Delhi), social media icons, and caffeine.ai attribution.",
   "frontend/src/pages/HomePage.tsx": "Home page with centered hero section featuring looping ship-at-sea background video with static image fallback, darker overlay for text contrast, white hero text, credibility highlights grid with \"Why Choose Di Logisolutions\" heading, services preview, and CTA sections.",
   "frontend/src/components/ServicePreviewGrid.tsx": "Reusable grid component displaying four main service categories (Air, Ocean, Road, Warehousing) as preview cards.",
@@ -23,5 +23,6 @@
   "frontend/src/entry.tsx": "Hard maintenance gate entry point that renders only MaintenanceScreen when MAINTENANCE_ENABLED is true, using dynamic import to ensure the normal app module is never loaded during maintenance mode.",
   "frontend/index.html": "HTML entry point loading /src/entry.tsx as the sole runtime entry with updated title reflecting the GlobalFreight brand and logistics services.",
   "frontend/src/lib/maintenanceMode.ts": "Maintenance mode configuration flag (MAINTENANCE_ENABLED = false) that controls whether the site shows only the offline screen or runs normally, with clear documentation that this is the authoritative gate.",
-  "frontend/src/components/MaintenanceScreen.tsx": "Standalone offline screen with ShieldOff icon and clear messaging that the site is unavailable and all content/features are disabled, serving as the only UI when maintenance mode is enabled."
+  "frontend/src/components/MaintenanceScreen.tsx": "Standalone offline screen with ShieldOff icon and clear messaging that the site is unavailable and all content/features are disabled, serving as the only UI when maintenance mode is enabled.",
+  "frontend/src/components/ScrollToTop.tsx": "Non-visual component that listens to TanStack Router navigation events and scrolls the window to the top (0, 0) whenever the route changes."
 }

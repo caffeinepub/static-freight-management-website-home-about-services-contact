@@ -1,53 +1,30 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-07T06:07:22.940Z",
-  "summary": "Branding and contact info were updated in several UI components (header, footer, contact details card, about page). However, the requested new logo asset file itself is not shown as added, and some contact/address strings do not exactly match the provided values. Home page hero still uses “Global Freight …” wording rather than the updated branding.",
-  "missing_requirements": [
+  "generatedAt": "2026-02-08T08:09:55.800Z",
+  "summary": "Implemented a global scroll-to-top-on-navigation behavior by adding a ScrollToTop component and mounting it in the shared SiteLayout so route changes reset window scroll to (0,0). No missing implementation is evident for REQ-2 based on the provided diff summary. However, there are extra non-requested repo/meta updates.",
+  "missing_requirements": [],
+  "hallucinated_features": [
     {
-      "id": "REQ-33",
-      "requirement": "Add the user-provided logo image frgmtlogo.png to frontend/public/assets/ so it is available at a stable public path (e.g., /assets/frgmtlogo.png).",
-      "reason": "The header/footer now reference /assets/frgmtlogo.png, but the diff shows no added files, so there is no evidence the static asset was actually added under frontend/public/assets/.",
+      "description": "Added/updated project tracking metadata (project_state.json) unrelated to the runtime scroll-to-top fix.",
+      "reason": "BuildRequest only asks to fix scroll-to-top behavior; it does not request changes to project state/metadata files.",
       "evidence": [
-        "File diff summary: \"ADDED FILES: - none\"",
-        "frontend/src/components/HeaderNav.tsx (references src=\"/assets/frgmtlogo.png\")",
-        "frontend/src/components/SiteFooter.tsx (references src=\"/assets/frgmtlogo.png\")"
+        "project_state.json"
       ]
     },
     {
-      "id": "REQ-34",
-      "requirement": "Use the exact provided Office Address string everywhere it appears: “Di LOGISOLUTIONS, A89, ROAD NO 2, MAHIPALPUR, NEW DELHI,110037”.",
-      "reason": "The office address is split across lines and includes a space after the comma in “NEW DELHI, 110037”, which does not match the exact provided formatting “NEW DELHI,110037”.",
+      "description": "Updated generated documentation/summary file (frontend-file-summaries.txt) unrelated to the runtime scroll-to-top fix.",
+      "reason": "BuildRequest does not ask for updating file summary documentation.",
       "evidence": [
-        "frontend/src/components/ContactDetailsCard.tsx (shows \"NEW DELHI, 110037\")"
-      ]
-    },
-    {
-      "id": "REQ-34",
-      "requirement": "Show the exact provided Registered address: “RZK-2/326-I, Khasra No. 85/17, Block K-2, Nihal Vihar, Nangaloi, West Delhi, Delhi, 11004”.",
-      "reason": "The registered address displayed ends with postal code “110041”, not “11004” as provided.",
-      "evidence": [
-        "frontend/src/components/ContactDetailsCard.tsx (shows \"West Delhi, Delhi, 110041\")"
-      ]
-    },
-    {
-      "id": "REQ-35",
-      "requirement": "Replace remaining GlobalFreight brand mentions in prominent marketing headings/titles with the updated branding so the site consistently reflects Di Logisolutions/Di Logisolution.",
-      "reason": "The Home page hero H1 still reads “Global Freight Solutions for Your Business” rather than using the updated company branding.",
-      "evidence": [
-        "frontend/src/pages/HomePage.tsx (H1: \"Global Freight Solutions for Your Business\")"
+        "frontend-file-summaries.txt"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.68,
+  "confidence": 0.74,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/ContactDetailsCard.tsx",
-    "frontend/src/components/HeaderNav.tsx",
-    "frontend/src/components/SiteFooter.tsx",
-    "frontend/src/pages/AboutPage.tsx",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/components/ScrollToTop.tsx",
+    "frontend/src/components/SiteLayout.tsx",
     "project_state.json"
   ]
 }

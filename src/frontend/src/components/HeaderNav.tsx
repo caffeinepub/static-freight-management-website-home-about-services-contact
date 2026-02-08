@@ -25,7 +25,7 @@ export default function HeaderNav() {
           <img 
             src="/assets/frgmtlogo.png" 
             alt="Di Logisolutions" 
-            className="h-10 w-auto"
+            className="h-12 w-auto object-contain md:h-14"
           />
           <span className="text-xl font-bold tracking-tight">Di Logisolutions</span>
         </Link>
